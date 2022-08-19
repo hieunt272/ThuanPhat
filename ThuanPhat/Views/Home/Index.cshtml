@@ -45,7 +45,7 @@
 <section class="introduce">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 order-lg-0 order-1">
+            <div class="col-lg-6">
                 <div class="title-section" data-aos="fade-right" data-aos-duration="700">
                     @Resources.About
                     <div class="title-small">
@@ -78,7 +78,7 @@
                     <i class="fas fa-caret-right"></i>
                 </a>
             </div>
-            <div class="col-lg-6 order-lg-1 order-0">
+            <div class="col-lg-6 mt-lg-0 mt-4">
                 <div class="intro-img">
                     @if (config.AboutImage != null)
                     {
@@ -131,62 +131,58 @@
         <div class="container">
             @foreach (var categoty in Model.CategoryItems)
             {
-                <section class="training">
-                    <div class="container">
-                        <div class="text-center">
-                            <div class="title-section" data-aos="fade-right" data-aos-duration="700">
-                                @categoty.CategoryDto.CategoryName
-                                <div class="title-small">
-                                    trainings
-                                </div>
-                            </div>
+                <div class="text-center">
+                    <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                        @categoty.CategoryDto.CategoryName
+                        <div class="title-small">
+                            trainings
                         </div>
-                        @if (categoty.CategoryDto.Description != null)
+                    </div>
+                </div>
+                if (categoty.CategoryDto.Description != null)
+                {
+                    <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+                        @categoty.CategoryDto.Description
+                    </div>
+                }
+                if (categoty.ArticleDtos.Any())
+                {
+                    var delay = 200;
+                    <div class="training-list">
+                        @foreach (var item in categoty.ArticleDtos)
                         {
-                            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
-                                @categoty.CategoryDto.Description
+                            <div class="training-item" data-aos="fade-up-right" data-aos-duration="700" data-aos-delay="@delay">
+                                <div class="number">
+                                    @number
+                                </div>
+                                <div class="training-img">
+                                    <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })">
+                                        @if (item.Image != null)
+                                        {
+                                            <img data-src="@Path.Combine("/images/articles/", item.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@item.Subject" />
+                                        }
+                                    </a>
+                                </div>
+                                <div class="subject truncate">
+                                    <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" title="@item.Subject">
+                                        @item.Subject
+                                    </a>
+                                </div>
+                                <div class="desc truncate">
+                                    @item.Description
+                                </div>
+                                <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" class="btn-article">
+                                    <span>
+                                        @Resources.MoreInfo
+                                    </span>
+                                    <i class="fas fa-caret-right"></i>
+                                </a>
                             </div>
-                        }
-                        @if (categoty.ArticleDtos.Any())
-                        {
-                            var delay = 200;
-                            <div class="training-list">
-                                @foreach (var item in categoty.ArticleDtos)
-                                {
-                                    <div class="training-item" data-aos="fade-up-right" data-aos-duration="700" data-aos-delay="@delay">
-                                        <div class="number">
-                                            @number
-                                        </div>
-                                        <div class="training-img">
-                                            <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })">
-                                                @if (item.Image != null)
-                                                {
-                                                    <img data-src="@Path.Combine("/images/articles/", item.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@item.Subject" />
-                                                }
-                                            </a>
-                                        </div>
-                                        <div class="subject truncate">
-                                            <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" title="@item.Subject">
-                                                @item.Subject
-                                            </a>
-                                        </div>
-                                        <div class="desc truncate">
-                                            @item.Description
-                                        </div>
-                                        <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" class="btn-article">
-                                            <span>
-                                                @Resources.MoreInfo
-                                            </span>
-                                            <i class="fas fa-caret-right"></i>
-                                        </a>
-                                    </div>
-                                    number++;
-                                    delay += 100;
-                                }
-                            </div>
+                            number++;
+                            delay += 100;
                         }
                     </div>
-                </section>
+                }
             }
         </div>
     </section>

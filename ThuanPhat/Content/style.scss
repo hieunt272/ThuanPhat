@@ -271,6 +271,7 @@ input::-webkit-inner-spin-button {
 .dropdown-text {
     margin-left: 40px;
     font-size: .75rem;
+
     .btn {
         padding: 0 6px;
         color: $white;
@@ -719,6 +720,7 @@ input::-webkit-inner-spin-button {
         top: 50%;
         transform: translateY(-50%);
         transition: all .5s;
+
         &:hover {
             color: $white;
             background: $blue;
@@ -840,6 +842,7 @@ input::-webkit-inner-spin-button {
     border: 2px solid $blue;
     padding: 15px 15px 20px;
     transition: all .5s;
+
     &:hover {
         box-shadow: 0 5px 20px rgba(0, 0, 0, .2);
     }
@@ -1109,6 +1112,7 @@ input::-webkit-inner-spin-button {
         background: transparent;
         box-shadow: none;
     }
+
     button {
         border: 0;
         border-radius: 0 3px 3px 0;
@@ -1280,6 +1284,7 @@ input::-webkit-inner-spin-button {
 
 .about-img {
     min-height: 450px;
+
     img {
         width: 100%;
         aspect-ratio: 4/3;
@@ -1567,9 +1572,11 @@ input::-webkit-inner-spin-button {
     font-size: .875rem;
     font-style: italic;
     margin-top: 10px;
+
     ul {
         padding: 0;
         margin: 0;
+
         li {
             list-style: none;
         }
@@ -1953,8 +1960,6 @@ input::-webkit-inner-spin-button {
     }
 }
 
-
-
 /* Responsive */
 @include maxWidth(1366px) {
     .header-search {
@@ -2120,10 +2125,6 @@ input::-webkit-inner-spin-button {
     .intro-img {
         text-align: center;
         margin-bottom: 30px;
-
-        img {
-            width: 80%;
-        }
     }
 
     .list-article-intro {
@@ -2345,6 +2346,7 @@ input::-webkit-inner-spin-button {
 
     .recruit-form {
         width: 100%;
+
         label {
             text-align: left;
         }
@@ -2443,13 +2445,18 @@ input::-webkit-inner-spin-button {
         width: 70%;
     }
 
+    .banner-list img {
+        aspect-ratio: 4/3;
+    }
+
     .list-article-intro {
         width: 100%;
     }
 
     .article-intro {
-        width: 100%;
-        margin: 5px 0;
+        width: 48%;
+        margin: 5px 1%;
+        padding: .5rem;
     }
 
     .service {
@@ -2479,19 +2486,15 @@ input::-webkit-inner-spin-button {
         padding: 0 20px;
 
         .slick-arrow {
-            width: auto;
-            height: auto;
-            font-size: 1.5rem;
-            color: $blue;
-            background: transparent;
+            font-size: 1rem;
         }
 
         .chevron-prev {
-            left: -2%;
+            left: 0;
         }
 
         .chevron-next {
-            right: -2%;
+            right: 0;
         }
     }
 
@@ -2635,7 +2638,6 @@ input::-webkit-inner-spin-button {
     }
 }
 
-
 @keyframes jelly {
     0%, 100% {
         transform: scale(1, 1);
@@ -2667,7 +2669,6 @@ input::-webkit-inner-spin-button {
         background-position: 0% 50%;
     }
 }
-
 
 @keyframes slidein {
     0% {
