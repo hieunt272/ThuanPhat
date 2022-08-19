@@ -1,0 +1,64 @@
+﻿@model ThuanPhat.ViewModel.MenuArticleViewModel
+
+<div class="box-border p-3 shadow">
+    <form action="@Url.Action("SearchArticle")" class="form-search">
+        <div class="input-group">
+            <input type="text" class="form-control" required name="keywords" placeholder="@Resources.KeywordSearch...">
+            <button type="submit">
+                <i class="fal fa-search"></i>
+            </button>
+        </div>
+    </form>
+    @if (Model.ArticleCategoryDtos.Any())
+    {
+        <div class="category-post">
+            <div class="post-sidebar-title">
+                @Resources.ArticleList
+            </div>
+            <ul class="ul-reset mt-3">
+                @foreach (var category in Model.ArticleCategoryDtos.Where(a => a.ParentId == null))
+                {
+                    <li><a href="@Url.Action("ArticleCategory", "Home", new { url = category.Url, Culture })">@category.CategoryName</a></li>
+                    foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == category.Id))
+                    {
+                        <li><a href="@Url.Action("ArticleCategory", "Home", new { url = child.Url, Culture })">@child.CategoryName</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+    @if (Model.ArticleDtos.Any())
+    {
+        <div class="recent-post">
+            <div class="post-sidebar-title">
+                @Resources.RecentPost
+            </div>
+            @foreach (var article in Model.ArticleDtos)
+            {
+                <div class="media py-3">
+                    <div class="recent-post-img">
+                        <a href="@Url.Action("ArticleDetail", "Home", new { url = article.Url, Culture })" class="mr-3">
+                            @if (article.Image != null)
+                            {
+                                <img data-src="@Path.Combine("/images/articles/", article.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@article.Subject">
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/img-main/on-image.jpg" alt="@article.Subject" />
+                            }
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <a href="@Url.Action("ArticleDetail", "Home", new { url = article.Url, Culture })" class="subject truncate">
+                            @article.Subject
+                        </a>
+                        <span class="date">
+                            <i class="far fa-calendar"></i>
+                            @article.CreateDate.ToString("dd/MM/yyyy")
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

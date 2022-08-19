@@ -1,0 +1,105 @@
+﻿@model ThuanPhat.ViewModel.ListServiceViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách dịch vụ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách dịch vụ</h2>
+@if (ViewBag.Result == "success")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới dịch vụ thành công</strong></div>
+}
+@if (ViewBag.Result == "update")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật dịch vụ thành công</strong></div>
+}
+<a class="btn quick-link" href="@Url.Action("Service")"><i class="fal fa-plus-circle mr-1"></i>Thêm dịch vụ</a>
+<div class="box_content">
+    <form action="@Url.Action("ListService")" method="get">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Danh mục cấp 1</label> @Html.DropDownListFor(model => model.CatId, Model.SelectCategories, "Tất cả dịch vụ", new { data_item = "root-service" })
+            </div>
+            <div class="col-lg-3">
+                <label>Danh mục cấp 2</label> @Html.DropDownListFor(model => model.ChildId, Model.ChildCategoryList, "Tất cả dịch vụ", new { data_item = "child-service" })
+            </div>
+            <div class="col-lg-3">
+                <label>Từ khóa</label> @Html.TextBoxFor(a => a.Name, new { @class = "w300" })
+            </div>
+            <div class="col-lg-3 align-self-center">
+                <button type="submit" class="btn-search">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+    <p>Có tổng số <strong>@Model.Services.TotalItemCount</strong> dịch vụ</p>
+    <table class="list_table tablecenter table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 100px">Ngày đăng</th>
+                <th style="width: 50px">Hình ảnh</th>
+                <th style="width: 400px">Tiêu đề</th>
+                <th>Danh mục</th>
+                <th>Hoạt động</th>
+                <th style="width: 130px"></th>
+            </tr>
+            @foreach (var service in Model.Services)
+            {
+                <tr data-id="@service.Id">
+                    <td>@Html.DisplayFor(model => service.CreateDate)</td>
+                    <td>
+                        @if (service.Image != null)
+                        {
+                            <img class="img-border" src="@Path.Combine("/images/services/", service.Image)" /> }
+                        else
+                        {
+                            @:NO PICTURE
+                        }
+                    </td>
+                    <td class="left">
+                        <a href="@Url.Action("UpdateService", new { serviceId = service.Id })"><strong>@service.ServiceName</strong></a>
+                    </td>
+                    <td>@service.ServiceCategory.CategoryName</td>
+                    <td>@Html.DisplayFor(model => service.Active)</td>
+                    <td>
+                        <a href="@Url.Action("UpdateServiceLang", new{serviceId = service.Id})" data-fancybox data-type="iframe">Ngôn ngữ</a>
+                        @Html.ActionLink("Sửa", "UpdateService", new { serviceId = service.Id }) -
+                        <a href="javascript:;" onclick="deleteService('@service.Id')" style="color: red;">Xóa</a>
+                    </td>
+                </tr>
+            }
+            @if (Model.Services.PageCount > 1)
+            {
+                <tr>
+                    <td colspan="8">@Html.PagedListPager(Model.Services, page => Url.Action("ListService", new { page, catId = Model.CatId, childId = Model.ChildId, name = Model.Name }))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteService(id) {
+            if (confirm("Bạn có chắc chắn xóa dịch vụ này không?")) {
+                $.post("/Service/DeleteService", { serviceId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa dịch vụ thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    }
+                    else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }
+    </script>
+}
+

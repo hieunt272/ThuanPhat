@@ -1,0 +1,37 @@
+﻿@model ThuanPhat.Models.Career
+@{
+    Layout = "~/Views/Shared/_AdminIframeLayout.cshtml";
+    var categoryVi = Model.CareerLangs.SingleOrDefault(a => a.CareerId == Model.Id && a.LanguageId == 2);
+}
+
+<div>
+    <h2>Cập nhật tiếng nhật</h2>
+    <div class="box_content">
+        @if (ViewBag.Result == 1)
+        {
+            <div id="AlertBox" class="alert alert-success text-center"><strong>Cập nhật thành công</strong></div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <input type="hidden" name="CareerId" value="@Model.Id" />
+            <input type="hidden" name="LangId" value="2" />
+            <table class="form_table">
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.Name</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Nghề nghiệp</td>
+                    <td class="form_text">
+                        <input type="text" name="Name" required="" maxlength="100" class="form_control w300" value="@(categoryVi?.Name)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><input type="submit" class="quick-link" value="Cập nhật" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

@@ -1,0 +1,135 @@
+﻿@model ThuanPhat.ViewModel.RecruitViewModel
+@{
+    ViewBag.Title = Resources.RegisterRecuit;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Recruit", Culture);
+    ViewBag.Robots = "noindex";
+}
+
+<section class="bg-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb px-0 m-0">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index")">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @Resources.RegisterRecuit
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="bg-second">
+    <div class="container">
+        @if (ViewBag.Result == "success")
+        {
+            <div id="AlertBox" class="success">
+                @Resources.RegisterSuccess
+                <div class="text-small">
+                    @Resources.WeContactSoon
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("RecruitForm", "Home", FormMethod.Post, new { @class = "recruit-form", enctype = "multipart/form-data" }))
+        {
+            <div class="form-title">
+                @Resources.InfoFull
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.CareerId)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.DropDownListFor(m => m.Recruit.CareerId, Model.SelectGroup, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Recruit.CareerId)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.FullName)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextBoxFor(m => m.Recruit.FullName, new { @class = "form-control", placeholder = Resources.FullName })
+                    @Html.ValidationMessageFor(m => m.Recruit.FullName)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.BirthYear)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextBoxFor(m => m.Recruit.BirthYear, new { @class = "form-control", placeholder = Resources.BirthYear })
+                    @Html.ValidationMessageFor(m => m.Recruit.BirthYear)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.Gender)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    <div class="form-control">
+                        <label>
+                            <input type="radio" checked name="Recruit.Gender" value="1" />
+                            <span>@Resources.Male</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="Recruit.Gender" value="2" />
+                            <span>@Resources.Female</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.Email)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextBoxFor(m => m.Recruit.Email, new { @class = "form-control", placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Recruit.Email)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.Mobile)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextBoxFor(m => m.Recruit.Mobile, new { @class = "form-control", placeholder = Resources.NumberPhone })
+                    @Html.ValidationMessageFor(m => m.Recruit.Mobile)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.ContactMethod)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    <div class="form-control">
+                        <label>
+                            <input type="radio" checked name="Recruit.ContactMethod" value="1" />
+                            <span>@Resources.Call</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="Recruit.ContactMethod" value="2" />
+                            <span>Email</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.ContactHour)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextBoxFor(m => m.Recruit.ContactHour, new { @class = "form-control", placeholder = Resources.Example })
+                    @Html.ValidationMessageFor(m => m.Recruit.ContactHour)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.Address)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextAreaFor(m => m.Recruit.Address, new { rows = 2, placeholder = Resources.Place })
+                    @Html.ValidationMessageFor(m => m.Recruit.Address)
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.Resume)
+                </div>
+                <div class="col-8 d-flex align-items-center">
+                    @Html.TextBoxFor(model => model.Recruit.Resume, new { type = "file" })
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    @Html.LabelFor(m => m.Recruit.Body)
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    @Html.TextAreaFor(m => m.Recruit.Body, new { rows = 4, placeholder = Resources.Message })
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit">
+                    @Resources.Confirm
+                </button>
+            </div>
+        }
+    </div>
+</section>

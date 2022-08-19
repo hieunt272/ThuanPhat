@@ -1,0 +1,269 @@
+﻿@model ThuanPhat.ViewModel.HeaderViewModel
+@using ThuanPhat.Models
+@{
+    var config = Model.ConfigSiteDto;
+}
+
+<section class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="logo">
+                    <a href="@Url.Action("Index")">
+                        @if (config.Image != null)
+                        {
+                            <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@config.Title" />
+                        }
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="header-top">
+                    <div class="header-contact">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:@config.Hotline">
+                            @config.Hotline
+                        </a>
+                    </div>
+                    <div class="header-contact">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:@config.Email">
+                            @config.Email
+                        </a>
+                    </div>
+                    <div class="dropdown dropdown-text d-none d-lg-inline-flex">
+                        <span>@Resources.Language</span>
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                            @if (Culture == "vi")
+                            {
+                                @:Tiếng Việt
+                            }
+                            else
+                            {
+                                @Resources.Japanese
+                            }
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown action chat">
+                            <a class="dropdown-item" href="@Url.Action("Index", new{culture = "vi"})"><img class="img-flag mr-1" src="~/Content/images/img-main/vn.jpg" alt="vn" /> @Resources.Vietnamese</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", new{culture = "ja"})"><img class="img-flag mr-1" src="~/Content/images/img-main/japan.png" alt="en" /> @Resources.Japanese</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu">
+                    <ul class="ul-reset nav">
+                        @if (Model.IntroduceCatDto.Any(a => a.ParentId == null))
+                        {
+                            foreach (var item in Model.IntroduceCatDto.Where(a => a.ParentId == null).Take(1))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Introduce", new { Culture })">
+                                        @item.CategoryName
+                                    </a>
+                                    @if (Model.IntroduceCatDto.Any(a => a.ParentId == item.Id))
+                                    {
+                                        <i class="fas fa-caret-down"></i>
+                                        <div class="drop">
+                                            <ul class="ul-reset sub-nav">
+                                                @foreach (var child in Model.IntroduceCatDto.Where(a => a.ParentId == item.Id))
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })">
+                                                            @child.CategoryName
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </li>
+                            }
+                        }
+                        @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
+                        {
+                            foreach (var item in Model.ServiceCategoryDtos.Where(a => a.ParentId == null))
+                            {
+                                <li>
+                                    <a href="@Url.Action("ServiceCategory", new { url = item.Url, Culture })">
+                                        @item.CategoryName
+                                    </a>
+                                    @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == item.Id))
+                                    {
+                                        <i class="fas fa-caret-down"></i>
+                                        <div class="drop">
+                                            <ul class="ul-reset sub-nav">
+                                                @foreach (var child in Model.ServiceCategoryDtos.Where(a => a.ParentId == item.Id))
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("ServiceCategory", new { url = child.Url, Culture })">
+                                                            @child.CategoryName
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </li>
+                            }
+                        }
+                        @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == null))
+                        {
+                            foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null))
+                            {
+                                <li>
+                                    <a href="@Url.Action("ArticleCategory", new { url = item.Url, Culture })">
+                                        @item.CategoryName
+                                    </a>
+                                    @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id))
+                                    {
+                                        <i class="fas fa-caret-down"></i>
+                                        <div class="drop">
+                                            <ul class="ul-reset sub-nav">
+                                                @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id))
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })">
+                                                            @child.CategoryName
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </li>
+                            }
+                        }
+                        <li>
+                            <a href="@Url.Action("Contact", new { Culture })">
+                                @Resources.Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="btn-search">
+                        <i class="far fa-search"></i>
+                    </div>
+                    <form action="@Url.Action("SearchArticle", new { Culture })" class="header-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" autocomplete="off" required placeholder="@Resources.KeywordSearch..." name="keywords">
+                            <div class="input-group-prepend">
+                                <button type="submit">
+                                    <i class="far fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="header-mb">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="logo">
+            <a href="@Url.Action("Index")">
+                @if (config.Image != null)
+                {
+                    <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@config.Title" />
+                }
+            </a>
+        </div>
+        <div class="btn-search">
+            <i class="far fa-search"></i>
+        </div>
+        <form action="@Url.Action("SearchArticle", new { Culture })" class="header-search">
+            <div class="input-group">
+                <input type="text" class="form-control" autocomplete="off" required placeholder="@Resources.KeywordSearch..." name="keywords">
+                <div class="input-group-prepend">
+                    <button type="submit">
+                        <i class="far fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="menu-mb">
+            <ul class="ul-reset nav-mb">
+                @if (Model.IntroduceCatDto.Any(a => a.ParentId == null))
+                {
+                    foreach (var item in Model.IntroduceCatDto.Where(a => a.ParentId == null))
+                    {
+                        <li>
+                            <a href="@Url.Action("Introduce", new { Culture })">
+                                @item.CategoryName
+                            </a>
+                            @if (Model.IntroduceCatDto.Any(a => a.ParentId == item.Id))
+                            {
+                                <ul class="ul-reset sub-nav-mb">
+                                    @foreach (var child in Model.IntroduceCatDto.Where(a => a.ParentId == item.Id))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ArticleCategory", "Home", new { url = child.Url, Culture })">
+                                                @child.CategoryName
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                }
+                @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
+                {
+                    foreach (var item in Model.ServiceCategoryDtos.Where(a => a.ParentId == null))
+                    {
+                        <li>
+                            <a href="@Url.Action("ServiceCategory", "Home", new { url = item.Url, Culture })">
+                                @item.CategoryName
+                            </a>
+                            @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == item.Id))
+                            {
+                                <ul class="ul-reset sub-nav-mb">
+                                    @foreach (var child in Model.ServiceCategoryDtos.Where(a => a.ParentId == item.Id))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ServiceCategory", "Home", new { url = child.Url, Culture })">
+                                                @child.CategoryName
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                }
+                @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == null))
+                {
+                    foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null))
+                    {
+                        <li>
+                            <a href="@Url.Action("ArticleCategory", "Home", new { url = item.Url, Culture })">
+                                @item.CategoryName
+                            </a>
+                            @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id))
+                            {
+                                <ul class="ul-reset sub-nav-mb">
+                                    @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ArticleCategory", "Home", new { url = child.Url, Culture })">
+                                                @child.CategoryName
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                }
+                <li>
+                    <a href="@Url.Action("Contact")">
+                        @Resources.Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

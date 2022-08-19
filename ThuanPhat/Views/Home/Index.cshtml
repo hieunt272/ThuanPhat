@@ -1,0 +1,399 @@
+﻿@model ThuanPhat.ViewModel.HomeViewModel
+@using ThuanPhat.Models
+@{
+    var config = Model.ConfigSiteDto;
+    ViewBag.Title = config.Title;
+    ViewBag.Description = config.Description;
+    ViewBag.Canonical = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("Index", new { Culture });
+
+    var fb = Model.BannerDtos.FirstOrDefault(b => b.Image != null && b.GroupId == 1);
+    if (fb != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/banners/", fb.Image);
+    }
+    var number = 1;
+}
+
+@if (Model.BannerDtos.Any(b => b.GroupId == 1))
+{
+    <section class="banner position-relative">
+        <div class="banner-list">
+            @foreach (var banner in Model.BannerDtos.Where(b => b.GroupId == 1))
+            {
+                <img data-src="@Path.Combine("/images/banners/", banner.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@banner.BannerName" />
+            }
+        </div>
+        @if (Model.BannerDtos.Where(a => a.GroupId == 1).Count() > 1)
+        {
+            <div class="contntes">
+                <div class="prev slick-arrow">
+                    <i class="far fa-chevron-left"></i>
+                </div>
+                <div class="stop"><i class="fas fa-play"></i></div>
+                <div class="restart">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+                <div class="dots"></div>
+                <div class="next slick-arrow">
+                    <i class="far fa-chevron-right"></i>
+                </div>
+            </div>
+        }
+    </section>
+}
+<section class="introduce">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-lg-0 order-1">
+                <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                    @Resources.About
+                    <div class="title-small">
+                        company
+                    </div>
+                </div>
+                @if (config.AboutText != null)
+                {
+                    <div class="intro-content">
+                        @Html.Raw(config.AboutText)
+                    </div>
+                }
+                @if (Model.IntroduceDtos.Any())
+                {
+                    var delay = 200;
+                    <div class="list-article-intro">
+                        @foreach (var item in Model.IntroduceDtos)
+                        {
+                            <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" class="article-intro" data-aos="fade-zoom-in" data-aos-duration="700" data-aos-delay="@delay">
+                                @item.Subject
+                            </a>
+                            delay += 100;
+                        }
+                    </div>
+                }
+                <a href="@Url.Action("Introduce", new { Culture })" class="btn-main">
+                    <span>
+                        @Resources.AboutMore
+                    </span>
+                    <i class="fas fa-caret-right"></i>
+                </a>
+            </div>
+            <div class="col-lg-6 order-lg-1 order-0">
+                <div class="intro-img">
+                    @if (config.AboutImage != null)
+                    {
+                        <img data-src="@Path.Combine("/images/configs/", config.AboutImage)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="Ảnh giới thiệu" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@if (Model.ServiceDtos.Any())
+{
+    var delay = 200;
+    <section class="service">
+        <div class="container">
+            <div class="text-center">
+                <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                    @Resources.OutService
+                    <div class="title-small">
+                        service
+                    </div>
+                </div>
+            </div>
+            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+                @Resources.SubTitleService
+            </div>
+            <div class="row">
+                @foreach (var item in Model.ServiceDtos)
+                {
+                    <div class="col-lg-4 col-12" data-aos="flip-left" data-aos-duration="700" data-aos-delay="@delay">
+                        @Html.Partial("_ServiceItem", item)
+                    </div>
+                    delay += 100;
+                }
+            </div>
+            <div class="text-center">
+                <a href="@Url.Action("AllService", new { Culture })" class="btn-main">
+                    <span>
+                        @Resources.AllServiceMore
+                    </span>
+                    <i class="fas fa-caret-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+}
+@if (Model.CategoryItems.Any())
+{
+    <section class="training">
+        <div class="container">
+            @foreach (var categoty in Model.CategoryItems)
+            {
+                <section class="training">
+                    <div class="container">
+                        <div class="text-center">
+                            <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                                @categoty.CategoryDto.CategoryName
+                                <div class="title-small">
+                                    trainings
+                                </div>
+                            </div>
+                        </div>
+                        @if (categoty.CategoryDto.Description != null)
+                        {
+                            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+                                @categoty.CategoryDto.Description
+                            </div>
+                        }
+                        @if (categoty.ArticleDtos.Any())
+                        {
+                            var delay = 200;
+                            <div class="training-list">
+                                @foreach (var item in categoty.ArticleDtos)
+                                {
+                                    <div class="training-item" data-aos="fade-up-right" data-aos-duration="700" data-aos-delay="@delay">
+                                        <div class="number">
+                                            @number
+                                        </div>
+                                        <div class="training-img">
+                                            <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })">
+                                                @if (item.Image != null)
+                                                {
+                                                    <img data-src="@Path.Combine("/images/articles/", item.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@item.Subject" />
+                                                }
+                                            </a>
+                                        </div>
+                                        <div class="subject truncate">
+                                            <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" title="@item.Subject">
+                                                @item.Subject
+                                            </a>
+                                        </div>
+                                        <div class="desc truncate">
+                                            @item.Description
+                                        </div>
+                                        <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" class="btn-article">
+                                            <span>
+                                                @Resources.MoreInfo
+                                            </span>
+                                            <i class="fas fa-caret-right"></i>
+                                        </a>
+                                    </div>
+                                    number++;
+                                    delay += 100;
+                                }
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
+        </div>
+    </section>
+}
+@if (Model.RecruitDto != null)
+{
+    <section class="recruit" @if (Model.RecruitDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/articleCategory/", Model.RecruitDto.Image) + ")'") }>
+        <div class="container">
+            <div class="box-recruit">
+                <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                    @Model.RecruitDto.CategoryName
+                    <div class="title-small">
+                        company
+                    </div>
+                </div>
+                <div class="desc-cat" data-aos="fade-left" data-aos-duration="700">
+                    @Resources.SubTitleRecruit<br />
+                    @Resources.SubTitleRecruit2
+                </div>
+                <a href="@Url.Action("ArticleCategory", "Home", new { url = Model.RecruitDto.Url, Culture })" class="btn-main">
+                    <span>
+                        @Resources.MoreInfo
+                    </span>
+                    <i class="fas fa-caret-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+}
+@if (Model.ArticleDtos.Any())
+{
+    <section class="news">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                    @Resources.NewsEvent
+                    <div class="title-small">
+                        news
+                    </div>
+                </div>
+                <a href="@Url.Action("AllArticle", new { Culture })" class="btn-news">
+                    @Resources.AllArticle
+                    <i class="far fa-chevron-right"></i>
+                </a>
+            </div>
+            <div class="marquee">
+                @foreach (var item in Model.ArticleDtos)
+                {
+                    <div class="news-item">
+                        <div class="calendar">
+                            @item.CreateDate.ToString("dd.MM.yyyy")
+                        </div>
+                        <a href="@Url.Action("ArticleCategory", new { url = item.CategoryUrl, Culture })" class="news-cat">
+                            <span>
+                                @item.CategoryName
+                            </span>
+                        </a>
+                        <div class="subject truncate">
+                            <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" title="@item.Subject">
+                                @item.Subject
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+<section class="contact-h">
+    <div class="container">
+        <div class="text-center position-relative">
+            <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                @Resources.ContactUs
+                <div class="title-small">
+                    contact
+                </div>
+            </div>
+            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+                @Resources.SubTitleContact<br />
+                @Resources.SubTitleContact2
+            </div>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="@Url.Action("Contact", new { Culture })" class="btn-contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>
+                        @Resources.ContactUs
+                    </span>
+                </a>
+                <a href="@Url.Action("Recruit", new { Culture })" class="btn-contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>
+                        @Resources.ClickHere<br />
+                        @Resources.RegisterRecuit
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="logo">
+                    @if (config.Image != null)
+                    {
+                        <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@config.Title" />
+                    }
+                </div>
+                <div class="title-main">
+                    @config.Title
+                </div>
+                <ul class="ul-reset contact-footer">
+                    <li>
+                        <span>
+                            @Resources.Place:
+                        </span>
+                        @config.Place
+                    </li>
+                    <li>
+                        <span>
+                            @Resources.Mobile:
+                        </span>
+                        <a href="tel:@config.Hotline">
+                            @config.Hotline
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            Email:
+                        </span>
+                        <a href="mailto:@config.Email">
+                            @config.Email
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            @Resources.TaxCode:
+                        </span>
+                        @config.TaxCode
+                    </li>
+                </ul>
+                @if (config.InfoFooter != null)
+                {
+                    <div class="info-footer">
+                        @Html.Raw(config.InfoFooter)
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="title-footer">
+                    @Resources.RegisterNews
+                </div>
+                <div class="sub-title-footer">
+                    @Resources.RegisterNewsContent
+                </div>
+                <form class="subcribe-form">
+                    @Html.AntiForgeryToken()
+                    <input type="text" name="Email" required class="form-control" placeholder="Email Address" />
+                </form>
+                <div class="title-footer">
+                    @Resources.Social
+                </div>
+                <div class="social">
+                    <a href="@config.Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="@config.Facebook">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="@config.Facebook">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="@config.Facebook">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="title-footer">
+                    fanpage
+                </div>
+                @if (config.Facebook != null)
+                {
+                    <div class="embed-responsive embed-responsive-16by9 fanpage">
+                        <div class="fb-page" data-href="@config.Facebook" data-tabs="" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="@config.Facebook" class="fb-xfbml-parse-ignore">
+                                <a href="@config.Facebook">@config.Title</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="copyright">
+    THUANPHAT HR 2022. All rights reserved. Powered by VicoGroup
+</section>
+<section class="overlay"></section>
+<section class="btn-scroll" title="Go to top">
+    <i class="fal fa-arrow-up"></i>
+</section>
+
+@section scripts{
+    <script src="~/Scripts/jquery.marquee.min.js"></script>
+    <script>
+        homeJs()
+    </script>
+}

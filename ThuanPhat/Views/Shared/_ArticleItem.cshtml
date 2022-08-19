@@ -1,0 +1,30 @@
+﻿@model ThuanPhat.Models.ArticleDto
+
+<div class="article-item">
+    <div class="training-img">
+        <a href="@Url.Action("ArticleDetail", new { url = Model.Url, Culture })">
+            @if (Model.Image != null)
+            {
+                <img data-src="@Path.Combine("/images/articles/", Model.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@Model.Subject" />
+            }
+            else
+            {
+                <img src="~/Content/images/img-main/on-image.jpg" alt="@Model.Subject" />
+            }
+        </a>
+    </div>
+    <div class="subject truncate">
+        <a href="@Url.Action("ArticleDetail", new { url = Model.Url, Culture })" title="@Model.Subject">
+            @Model.Subject
+        </a>
+    </div>
+    <div class="desc truncate">
+        @Model.Description
+    </div>
+    <a href="@Url.Action("ArticleDetail", new { url = Model.Url, Culture })" class="btn-article">
+        <span>
+            @Resources.MoreInfo
+        </span>
+        <i class="fas fa-caret-right"></i>
+    </a>
+</div>

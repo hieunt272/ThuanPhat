@@ -1,0 +1,92 @@
+﻿@model ThuanPhat.ViewModel.ContactViewModel
+@{
+    var config = Model.ConfigSiteDto;
+    ViewBag.Title = Resources.Contact;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Contact", new { Culture });
+}
+
+<section class="bg-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb px-0 m-0">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index")">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @Resources.Contact
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="contact pb-lg-5 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="box-border shadow h-100">
+                    <div class="title">
+                        @Resources.InfoContactUs
+                    </div>
+                    <div class="info-us">
+                        <div class="label">
+                            @Resources.Place:
+                        </div>
+                        <span>
+                            @config.Place
+                        </span>
+                    </div>
+                    <div class="info-us">
+                        <div class="label">
+                            @Resources.IncName:
+                        </div>
+                        <span>
+                            @config.Title
+                        </span>
+                    </div>
+                    <div class="info-us">
+                        <div class="label">
+                            Email:
+                        </div>
+                        <a href="mailto:@config.Email">
+                            @config.Email
+                        </a>
+                    </div>
+                    <div class="info-us">
+                        <div class="label">
+                            Hotline:
+                        </div>
+                        <a href="tel:@config.Hotline">
+                            @config.Hotline
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form class="contact-form">
+                    <div class="title-contact">
+                        @Resources.InfoFull
+                    </div>
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
+                    @Html.TextBoxFor(model => model.Contact.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
+                    @Html.ValidationMessageFor(model => model.Contact.FullName)
+                    @Html.TextBoxFor(model => model.Contact.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.Mobile })
+                    @Html.ValidationMessageFor(model => model.Contact.Mobile)
+                    @Html.TextBoxFor(model => model.Contact.Email, new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(model => model.Contact.Email)
+                    @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Message })
+                    @Html.ValidationMessageFor(model => model.Contact.Body)
+                    <button type="submit" class="btn-contact">
+                        <span>@Resources.SendContact</span>
+                    </button>
+                </form>
+            </div>
+            <div class="col-lg-12">
+                @if (config.GoogleMap != null)
+                {
+                    <div class="embed-responsive embed-responsive-16by9 map">
+                        @Html.Raw(config.GoogleMap)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Action("Footer")

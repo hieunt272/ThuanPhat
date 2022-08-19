@@ -1,0 +1,110 @@
+﻿@model ThuanPhat.ViewModel.IntroduceViewModel
+@{
+    ViewBag.Title = Model.IntroduceDto.TitleMeta ?? Model.IntroduceDto.CategoryName;
+    ViewBag.Description = Model.IntroduceDto.DescriptionMeta ?? Model.IntroduceDto.CategoryName;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Introduce", new { url = Model.IntroduceDto.Url, Culture });
+}
+
+<section class="banner-cat banner-intro" @if (Model.IntroduceDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/articleCategory/", Model.IntroduceDto.Image) + ")'") }>
+    <div class="container">
+        <div class="cat-name">
+            @Resources.Introduce
+        </div>
+        <div class="cat-desc">
+            @Model.IntroduceDto.Description
+        </div>
+    </div>
+</section>
+<section class="about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 order-lg-0 order-1">
+                <div class="title-section">
+                    @Resources.About
+                </div>
+                @if (Model.IntroduceDto.AboutText != null)
+                {
+                    <div class="about-content">
+                        @Html.Raw(Model.IntroduceDto.AboutText)
+                    </div>
+                }
+            </div>
+            <div class="col-lg-7 order-lg-1 order-0">
+                <div class="about-img">
+                    @if (Model.IntroduceDto.AboutImage != null)
+                    {
+                        <img data-src="@Path.Combine("/images/articleCategory/", Model.IntroduceDto.AboutImage)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="Ảnh giới thiệu" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="motto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="title-section">
+                    @Resources.MottoUs
+                </div>
+                @if (Model.IntroduceDto.MottoText != null)
+                {
+                    <div class="motto-content">
+                        @Html.Raw(Model.IntroduceDto.MottoText)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="formation">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="formation-img">
+                    @if (Model.IntroduceDto.FormationImage != null)
+                    {
+                        <img data-src="@Path.Combine("/images/articleCategory/", Model.IntroduceDto.FormationImage)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="Ảnh giới thiệu" />
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="title-section">
+                    @Resources.Formation
+                </div>
+                @if (Model.IntroduceDto.FormationText != null)
+                {
+                    <div class="formation-content">
+                        @Html.Raw(Model.IntroduceDto.FormationText)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@if (Model.RecruitDto != null)
+{
+    <section class="recruit" @if (Model.RecruitDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/articleCategory/", Model.RecruitDto.Image) + ")'") }>
+        <div class="container">
+            <div class="box-recruit">
+                <div class="title-section">
+                    @Model.RecruitDto.CategoryName
+                    <div class="title-small">
+                        company
+                    </div>
+                </div>
+                <div class="desc-cat">
+                    @Resources.SubTitleRecruit<br />
+                    @Resources.SubTitleRecruit2
+                </div>
+                <a href="@Url.Action("ArticleCategory", "Home", new { url = Model.RecruitDto.Url, Culture })" class="btn-main">
+                    <span>
+                        @Resources.MoreInfo
+                    </span>
+                    <i class="fas fa-caret-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+}
+@Html.Action("Footer")

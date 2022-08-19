@@ -1,0 +1,196 @@
+﻿@model ThuanPhat.ViewModel.FooteViewModel
+@{
+    var config = Model.ConfigSiteDto;
+}
+
+<section class="step-by-step">
+    <div class="container">
+        <div class="box-step">
+            <div class="step-title">
+                @Resources.StepJob
+            </div>
+            <div class="step-item" data-aos="fade-zoom-in" data-aos-duration="700" data-aos-delay="200">
+                <div class="step-img">
+                    <div class="number">
+                        01
+                    </div>
+                    <img src="~/Content/images/img-main/step-icon.png" />
+                </div>
+                <div class="step-name">
+                    @Resources.RegisterConsult
+                </div>
+            </div>
+            <i class="fas fa-chevron-right step-icon"></i>
+            <div class="step-item" data-aos="fade-zoom-in" data-aos-duration="700" data-aos-delay="300">
+                <div class="step-img">
+                    <div class="number">
+                        02
+                    </div>
+                    <img src="~/Content/images/img-main/step-icon (1).png" />
+                </div>
+                <div class="step-name">
+                    @Resources.JobIntro
+                </div>
+            </div>
+            <i class="fas fa-chevron-right step-icon"></i>
+            <div class="step-item" data-aos="fade-zoom-in" data-aos-duration="700" data-aos-delay="400">
+                <div class="step-img">
+                    <div class="number">
+                        03
+                    </div>
+                    <img src="~/Content/images/img-main/step-icon (2).png" />
+                </div>
+                <div class="step-name">
+                    @Resources.Training
+                </div>
+            </div>
+            <i class="fas fa-chevron-right step-icon"></i>
+            <div class="step-item" data-aos="fade-zoom-in" data-aos-duration="700" data-aos-delay="500">
+                <div class="step-img">
+                    <div class="number">
+                        04
+                    </div>
+                    <img src="~/Content/images/img-main/step-icon (3).png" />
+                </div>
+                <div class="step-name">
+                    @Resources.Work
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="contact-h">
+    <div class="container">
+        <div class="text-center position-relative">
+            <div class="title-section" data-aos="fade-right" data-aos-duration="700">
+                @Resources.ContactUs
+                <div class="title-small">
+                    contact
+                </div>
+            </div>
+            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+                @Resources.SubTitleContact<br />
+                @Resources.SubTitleContact2
+            </div>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="@Url.Action("Contact", new { Culture })" class="btn-contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>
+                        @Resources.ContactUs
+                    </span>
+                </a>
+                <a href="@Url.Action("Recruit", new { Culture })" class="btn-contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>
+                        @Resources.ClickHere<br />
+                        @Resources.RegisterRecuit
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="logo">
+                    @if (config.Image != null)
+                    {
+                        <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@config.Title" />
+                    }
+                </div>
+                <div class="title-main">
+                    @config.Title
+                </div>
+                <ul class="ul-reset contact-footer">
+                    <li>
+                        <span>
+                            @Resources.Place:
+                        </span>
+                        @config.Place
+                    </li>
+                    <li>
+                        <span>
+                            @Resources.Mobile:
+                        </span>
+                        <a href="tel:@config.Hotline">
+                            @config.Hotline
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            Email:
+                        </span>
+                        <a href="mailto:@config.Email">
+                            @config.Email
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            @Resources.TaxCode:
+                        </span>
+                        @config.TaxCode
+                    </li>
+                </ul>
+                @if (config.InfoFooter != null)
+                {
+                    <div class="info-footer">
+                        @Html.Raw(config.InfoFooter)
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="title-footer">
+                    @Resources.RegisterNews
+                </div>
+                <div class="sub-title-footer">
+                    @Resources.RegisterNewsContent
+                </div>
+                <form class="subcribe-form">
+                    @Html.AntiForgeryToken()
+                    <input type="text" name="Email" required class="form-control" placeholder="Email Address" />
+                </form>
+                <div class="title-footer">
+                    @Resources.Social
+                </div>
+                <div class="social">
+                    <a href="@config.Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="@config.Facebook">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="@config.Facebook">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="@config.Facebook">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="title-footer">
+                    fanpage
+                </div>
+                @if (config.Facebook != null)
+                {
+                    <div class="embed-responsive embed-responsive-16by9 fanpage">
+                        <div class="fb-page" data-href="@config.Facebook" data-tabs="" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="@config.Facebook" class="fb-xfbml-parse-ignore">
+                                <a href="@config.Facebook">@config.Title</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="copyright">
+    THUANPHAT HR 2022. All rights reserved. Powered by VicoGroup
+</section>
+<section class="overlay"></section>
+<section class="btn-scroll" title="Go to top">
+    <i class="fal fa-arrow-up"></i>
+</section>

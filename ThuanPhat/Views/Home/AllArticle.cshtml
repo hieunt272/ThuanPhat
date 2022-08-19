@@ -1,0 +1,90 @@
+﻿@model ThuanPhat.ViewModel.AllArticleViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = Resources.AllArticle;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("AllArticle", Culture);
+}
+
+<section class="banner-cat all-article">
+    <div class="container">
+        <div class="cat-name">
+            @Resources.AllArticle
+        </div>
+    </div>
+</section>
+<section class="article-cat">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-lg-0 order-1 mb-4">
+                <div class="category">
+                    <div class="category-title">
+                        @Resources.ArticleList
+                    </div>
+                    <div class="accordion">
+                        @foreach (var item in Model.CategoryDtos.Where(a => a.ParentId == null))
+                        {
+                            <div class="card">
+                                <div class="card-header" id="heading-@item.Id">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h2 class="mb-0">
+                                            <a href="@Url.Action("ArticleCategory", "Home", new { url = item.Url, Culture })">@item.CategoryName</a>
+                                        </h2>
+                                        @if (Model.CategoryDtos.Any(a => a.ParentId == item.Id))
+                                        {
+                                            <button class="btn-card" type="button" data-toggle="collapse" data-target="#collapse-@item.Id" aria-expanded="false" aria-controls="collapse-@item.Id">
+                                                <i class="fas fa-chevron-down"></i>
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                                @if (Model.CategoryDtos.Where(a => a.ParentId == item.Id).Any())
+                                {
+                                    <div id="collapse-@item.Id" class="collapse">
+                                        <div class="card-body">
+                                            <ul class="pl-0 mb-0">
+                                                @foreach (var child in Model.CategoryDtos.Where(p => p.ParentId == item.Id))
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("ArticleCategory", "Home", new { url = child.Url, Culture })">
+                                                            @child.CategoryName
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-lg-1 order-0">
+                <div class="row">
+                    @if (Model.ArticleDtos.Any())
+                    {
+                        foreach (var item in Model.ArticleDtos)
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                @Html.Partial("_ArticleItem", item)
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <p class="alert alert-success small">@Resources.ContentNotUpdate!!!!</p>
+                        </div>
+                    }
+                    @if (Model.ArticleDtos.PageCount > 1)
+                    {
+                        <div class="col-12 text-center mt-3">
+                            @Html.PagedListPager(Model.ArticleDtos, page => Url.Action("AllArticle", new { page }))
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Action("Footer")

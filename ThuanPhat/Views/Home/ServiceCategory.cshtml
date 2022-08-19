@@ -1,0 +1,49 @@
+﻿@model ThuanPhat.ViewModel.ServiceCategoryViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = Model.CategoryDto.TitleMeta ?? Model.CategoryDto.CategoryName;
+    ViewBag.Description = Model.CategoryDto.DescriptionMeta ?? Model.CategoryDto.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ServiceCategory", "Home", new { url = Model.CategoryDto.Url, Culture }); ;
+}
+
+<section class="banner-cat banner-service" @if (Model.CategoryDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/serviceCategory/", Model.CategoryDto.Image) + ")'") }>
+    <div class="container">
+        <div class="cat-name">
+            @Model.CategoryDto.CategoryName
+        </div>
+        @if (Model.CategoryDto.Description != null)
+        {
+            <div class="cat-desc">
+                @Model.CategoryDto.Description
+            </div>
+        }
+    </div>
+</section>
+<section class="service-cat">
+    <div class="container">
+        <div class="row">
+            @if (Model.ServiceDtos.Any())
+            {
+                foreach (var item in Model.ServiceDtos)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        @Html.Partial("_ServiceItem", item)
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <p class="alert alert-success small">@Resources.ContentNotUpdate!!!!</p>
+                </div>
+            }
+            @if (Model.ServiceDtos.PageCount > 1)
+            {
+                <div class="col-12 text-center mt-3">
+                    @Html.PagedListPager(Model.ServiceDtos, page => Url.Action("ServiceCategory", new { page }))
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@Html.Action("Footer")

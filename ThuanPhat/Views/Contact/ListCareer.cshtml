@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ThuanPhat.Models.Career>
+<table class="list_table tablecenter mb-4" id="list-career">
+    <tr>
+        <th>STT</th>
+        <th>Tên nghề nghiệp</th>
+        <th>Hoạt động</th>
+        <th style="width: 160px"></th>
+    </tr>
+    <tbody id="sortable-cat">
+        @foreach (var career in Model)
+        {
+            <tr data-id="@career.Id" style="background: #ededed;">
+                <td style="width: 120px;">
+                    @career.Sort
+                </td>
+                <td class="left"><strong>@career.Name</strong></td>
+                <td>@Html.DisplayFor(a => career.Active)</td>
+                <td>
+                    <a href="@Url.Action("UpdateCareerLang", new { careerId = career.Id })" data-fancybox data-type="iframe">Ngôn ngữ</a>-
+                    @Html.ActionLink("Sửa", "EditCareer", new { careerId = career.Id }) -
+                    <a href="javascript:;" onclick="deleteCareer('@career.Id')" style="color: red">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    function deleteCareer(id) {
+        if (confirm("Bạn có chắc chắn xóa nghề nghiệp này không?")) {
+            $.post("/Contact/DeleteCareer", { careerId: id }, function (data) {
+                if (data) {
+                    $.toast({
+                        text: 'Đang xóa nghề nghiệp',
+                        position: 'bottom-right',
+                        icon: 'success',
+                    })
+                    $("tr[data-id='" + id + "']").fadeOut();
+                } else {
+                    $.toast({
+                        text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                        icon: 'error',
+                    })
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,87 @@
+﻿@model ThuanPhat.Models.Banner
+@{
+    Layout = "~/Views/Shared/_AdminIframeLayout.cshtml";
+    var categoryVi = Model.BannerLangs.SingleOrDefault(a => a.BannerId == Model.Id && a.LanguageId == 2);
+}
+
+<div>
+    <h2>Cập nhật tiếng nhật</h2>
+    <div class="box_content px-300">
+        @if (ViewBag.Result == 1)
+        {
+            <div id="AlertBox" class="alert alert-success"><strong>Cập nhật thành công</strong></div>
+        }
+        @using (Html.BeginForm("UpdateBannerLang", "Banner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+            <input type="hidden" name="BannerId" value="@Model.Id" />
+            <input type="hidden" name="LangId" value="2" />
+            <table class="form_table">
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.BannerName</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Tên banner</td>
+                    <td class="form_text">
+                        <input type="text" name="Name" required="" maxlength="100" class="form_control w300" value="@(categoryVi?.BannerName)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        <div class="mask-body">
+                            @Html.Raw(Model.Slogan)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Slogan</td>
+                    <td class="form_text">
+                        <input type="text" name="Slogan" value="@(categoryVi?.Slogan)" class="form_control w300" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">@Html.LabelFor(model => model.Image)</td>
+                    <td class="form_text">
+                        <input type="file" name="Image" value="" />
+                        <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span>
+                    </td>
+                </tr>
+                @if (categoryVi.Image != null)
+                {
+                    <tr>
+                        <td class="form_name"></td>
+                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/banners/",  categoryVi.Image)" /></td>
+                    </tr>
+                }
+                <tr>
+                    <td class="form_name">Url</td>
+                    <td class="form_text">
+                        <input type="text" name="Url" value="@(categoryVi?.Url)" class="form_control w300" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        <div class="mask-body">
+                            @Html.Raw(Model.Content)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Nội dung</td>
+                    <td class="form_text">
+                        <textarea class="ckeditor" name="Content">@(categoryVi?.Content)</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><input type="submit" class="quick-link" value="Cập nhật" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

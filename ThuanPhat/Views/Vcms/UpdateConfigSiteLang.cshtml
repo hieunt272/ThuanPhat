@@ -1,0 +1,92 @@
+﻿@model ThuanPhat.Models.ConfigSite
+@{
+    Layout = "~/Views/Shared/_AdminIframeLayout.cshtml";
+    var categoryVi = Model.ConfigSiteLangs.SingleOrDefault(a => a.ConfigSiteId == Model.Id && a.LanguageId == 2);
+}
+
+<div>
+    <h2>Cập nhật tiếng nhật</h2>
+    <div class="box_content">
+        @if (ViewBag.Result == 1)
+        {
+            <div id="AlertBox" class="alert alert-success"><strong>Cập nhật thông tin thành công</strong></div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <input type="hidden" name="ConfigSiteId" value="@Model.Id" />
+            <input type="hidden" name="LangId" value="2" />
+            <table class="form_table">
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.Title</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Thẻ tiêu đề</td>
+                    <td class="form_text">
+                        <input type="text" name="Title" required="" maxlength="100" class="form_control w300" value="@(categoryVi?.Title)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.Description</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Thẻ mô tả</td>
+                    <td class="form_text">
+                        <textarea rows="4" class="form_control w300" name="Description">@(categoryVi?.Description)</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Địa chỉ</td>
+                    <td class="form_text">
+                        <input type="text" name="Place" maxlength="100" class="form_control w300" value="@(categoryVi?.Place)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Html.Raw(Model.AboutText)</strong></td>
+                </tr>
+
+                <tr>
+                    <td class="form_name">Thông tin bài giới thiệu</td>
+                    <td class="form_text">
+                        <textarea class="ckeditor" name="AboutText">@(categoryVi?.AboutText)</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        <div class="mask-body">
+                            @Html.Raw(Model.InfoContact)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Thông tin liên hệ</td>
+                    <td class="form_text">
+                        <textarea class="ckeditor" name="InfoContact">@(categoryVi?.InfoContact)</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        <div class="mask-body">
+                            @Html.Raw(Model.InfoFooter)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Thông tin chân trang</td>
+                    <td class="form_text">
+                        <textarea class="ckeditor" name="InfoFooter">@(categoryVi?.InfoFooter)</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><input type="submit" class="quick-link" value="Cập nhật" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

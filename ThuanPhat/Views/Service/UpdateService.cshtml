@@ -1,0 +1,92 @@
+﻿@model ThuanPhat.ViewModel.InsertServiceViewModel
+@{
+    ViewBag.Title = "Cập nhật dịch vụ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Cập nhật dịch vụ</h2>
+<a class="btn quick-link" href="@Url.Action("ListService")"><i class="far fa-list mr-1"></i> Danh sách dịch vụ</a>
+<div class="box_content">
+    @using (Html.BeginForm("UpdateService", "Service", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Service.Id)
+        <table class="form_table">
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.ServiceCategoryId)</td>
+                <td class="form_text">
+                    <select name="CategoryId" class="form_control w300" required="">
+                        <option value="">Chọn danh mục dịch vụ</option>
+                        @foreach (var category in Model.Categories.Where(a => a.ParentId == null))
+                        {
+                            <option value="@category.Id"
+                                    @if (category.Id == Model.Service.ServiceCategoryId) { @Html.Raw("selected='selected'") }>
+                                @category.CategoryName
+                            </option>
+                            foreach (var child in Model.Categories.Where(a => a.ParentId == category.Id))
+                            {
+                                <option value="@child.Id"
+                                        @if (child.Id == Model.Service.ServiceCategoryId) { @Html.Raw("selected='selected'") }>
+                                    -- @child.CategoryName
+                                </option>
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.ServiceName)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Service.ServiceName)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.Image)</td>
+                <td class="form_text">@Html.TextBoxFor(model => model.Service.Image, new { type = "file" }) <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span></td>
+            </tr>
+            @if (Model.Service.Image != null)
+            {
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><img class="img-border" src="@Path.Combine("/images/services/",  Model.Service.Image)" /></td>
+                </tr>
+            }
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.Description)</td>
+                <td class="form_text">
+                    @Html.EditorFor(model => model.Service.Description)
+                    @Html.ValidationMessageFor(model => model.Service.Description)
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.Body)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Service.Body)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.Home)</td>
+                <td class="form_text">@Html.CheckBoxFor(model => model.Service.Home)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.Active)</td>
+                <td class="form_text">@Html.CheckBoxFor(model => model.Service.Active, new { @checked = "checked" })</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.Url)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Service.Url)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.TitleMeta)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Service.TitleMeta)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Service.DescriptionMeta)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Service.DescriptionMeta)</td>
+            </tr>
+            <tr>
+                <td class="form_name"></td>
+                <td class="form_text">
+                    <input type="submit" class="btn quick-link" value="Cập nhật" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

@@ -1,0 +1,70 @@
+﻿@model ThuanPhat.Models.ServiceCategory
+@{
+    Layout = "~/Views/Shared/_AdminIframeLayout.cshtml";
+    var categoryVi = Model.ServiceCategoryLangs.SingleOrDefault(a => a.ServiceCategoryId == Model.Id && a.LanguageId == 2);
+}
+
+<div>
+    <h2>Cập nhật tiếng nhật</h2>
+    <div class="box_content px-300">
+        @if (ViewBag.Result == 1)
+        {
+            <div id="AlertBox" class="alert alert-success text-center"><strong>Cập nhật thành công</strong></div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <input type="hidden" name="ServiceCategoryId" value="@Model.Id" />
+            <input type="hidden" name="LangId" value="2" />
+            <table class="form_table">
+
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.CategoryName</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Tên danh mục</td>
+                    <td class="form_text">
+                        <input type="text" name="Name" required="" maxlength="100" class="form_control w300" value="@(categoryVi?.CategoryName)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.Description</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Mô tả dịch vụ</td>
+                    <td class="form_text">
+                        <input type="text" name="Description" required="" maxlength="100" class="form_control w300" value="@(categoryVi?.Description)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Đường dẫn</td>
+                    <td class="form_text">
+                        <input type="text" name="Url" maxlength="500" class="form_control w300" value="@(categoryVi?.Url)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Thẻ SEO Title</td>
+                    <td class="form_text"><input type="text" name="TitleMeta" maxlength="500" class="form_control w300" value="@(categoryVi?.TitleMeta)" /></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        @Model.DescriptionMeta
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Thẻ SEO Description</td>
+                    <td class="form_text">
+                        <textarea class="form_control w300" rows="4" name="DescriptionMeta">@(categoryVi?.DescriptionMeta)</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><input type="submit" class="quick-link" value="Cập nhật" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

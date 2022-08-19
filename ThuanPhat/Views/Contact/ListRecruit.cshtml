@@ -1,0 +1,94 @@
+﻿@model ThuanPhat.ViewModel.ListRecruitViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách đăng ký tuyển dụng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách đăng ký tuyển dụng</h2>
+<a class="btn quick-link" href="@Url.Action("Index","Vcms")"><i class="fal fa-home mr-1"></i>Về trang chính</a>
+<div class="box_content">
+    <div class="form-search-list">
+        <form action="@Url.Action("ListRecruit")" method="get" class="ml-0">
+            <p>
+                Tìm họ tên @Html.TextBoxFor(a => a.Name, new { @class = "w300" })
+                <button type="submit" class="btn-search">Tìm kiếm</button>
+            </p>
+        </form>
+    </div>
+    <p>Có tổng số <strong>@Model.Recruits.TotalItemCount</strong> đăng ký</p>
+    <table class="list_table tablecenter table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 100px">Ngày gửi</th>
+                <th style="width: 100px">Sơ yếu lý lịch</th>
+                <th style="width: 200px">Thông tin người đăng ký</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th style="width: 200px">Liên lạc</th>
+                <th style="width: 200px">Địa chỉ</th>
+                <th style="width: 200px">Lời nhắn</th>
+                <th style="width: 100px"></th>
+            </tr>
+            @foreach (var recruit in Model.Recruits)
+            {
+                <tr data-id="@recruit.Id">
+                    <td>@recruit.CreateDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        @if (recruit.Resume != null)
+                        {
+                            <img class="img-border" src="@Path.Combine("/images/recruits/", recruit.Resume)" /> }
+                        else
+                        {
+                            @:NO PICTURE
+                        }
+                    </td>
+                    <td class="left">
+                        <p><strong>Họ tên:</strong> @recruit.FullName</p>
+                        <p><strong>Năm sinh:</strong> @recruit.BirthYear</p>
+                        <p><strong>Giới tính:</strong> @Html.DisplayFor(m => recruit.Gender)</p>
+                    </td>
+                    <td>@recruit.Email</td>
+                    <td>@recruit.Mobile</td>
+                    <td class="left">
+                        <p><strong>Phương pháp liên lạc:</strong> @Html.DisplayFor(m => recruit.ContactMethod)</p>
+                        <p><strong>Giờ liên lạc:</strong> @recruit.ContactHour</p>
+                    </td>
+                    <td>@recruit.Address</td>
+                    <td>@recruit.Body</td>
+                    <td><a href="javascript:;" onclick="deleteRecruit('@recruit.Id')">Xóa</a></td>
+                </tr>
+            }
+            @if (Model.Recruits.PageCount > 1)
+            {
+                <tr>
+                    <td colspan="3">@Html.PagedListPager(Model.Recruits, page => Url.Action("ListRecruit", new { page, name = Model.Name }))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteRecruit(id) {
+            if (confirm("Bạn có chắc chắn xóa liên hệ này không?")) {
+                $.post("/Contact/DeleteRecruit", { recruitId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa đăng ký thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    }
+                    else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }</script>
+}
