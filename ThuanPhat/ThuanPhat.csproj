@@ -627,6 +627,7 @@
     <Content Include="Views\Service\UpdateServiceCategoryLang.cshtml" />
     <Content Include="Views\Service\UpdateServiceLang.cshtml" />
     <Content Include="Views\Contact\UpdateCareerLang.cshtml" />
+    <Content Include="webfonts\Inter-Black.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

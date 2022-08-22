@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+            <div class="sub-title" data-aos="fade-up" data-aos-duration="700">
                 @Resources.SubTitleService
             </div>
             <div class="row">
@@ -141,7 +141,7 @@
                 </div>
                 if (categoty.CategoryDto.Description != null)
                 {
-                    <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+                    <div class="sub-title" data-aos="fade-up" data-aos-duration="700">
                         @categoty.CategoryDto.Description
                     </div>
                 }
@@ -189,7 +189,7 @@
 }
 @if (Model.RecruitDto != null)
 {
-    <section class="recruit" @if (Model.RecruitDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/articleCategory/", Model.RecruitDto.Image) + ")'") }>
+    <section class="recruit">
         <div class="container">
             <div class="box-recruit">
                 <div class="title-section" data-aos="fade-right" data-aos-duration="700">
@@ -198,7 +198,7 @@
                         company
                     </div>
                 </div>
-                <div class="desc-cat" data-aos="fade-left" data-aos-duration="700">
+                <div class="desc-cat" data-aos="fade-up" data-aos-duration="700">
                     @Resources.SubTitleRecruit<br />
                     @Resources.SubTitleRecruit2
                 </div>
@@ -260,7 +260,7 @@
                     contact
                 </div>
             </div>
-            <div class="sub-title" data-aos="fade-left" data-aos-duration="700">
+            <div class="sub-title" data-aos="fade-up" data-aos-duration="700">
                 @Resources.SubTitleContact<br />
                 @Resources.SubTitleContact2
             </div>

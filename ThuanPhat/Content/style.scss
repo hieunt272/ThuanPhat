@@ -11,6 +11,12 @@
 }
 
 @font-face {
+    font-family: 'InterBlack';
+    font-display: swap;
+    src: url('../webfonts/Inter-Black.ttf') format('truetype');
+}
+
+@font-face {
     font-family: 'Fester Bold';
     font-display: swap;
     src: url('../webfonts/Fester Bold.otf') format('opentype');
@@ -33,6 +39,10 @@ $gradient: linear-gradient(90deg, #53BFB8 2.85%, #0944A2 100%);
 
 @mixin InterBold {
     font-family: 'InterBold';
+}
+
+@mixin InterBlack {
+    font-family: 'InterBlack';
 }
 
 @mixin FesterBold {
@@ -114,7 +124,7 @@ input::-webkit-inner-spin-button {
 }
 
 ::-webkit-scrollbar-track {
-    background: $white;
+    background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -248,7 +258,8 @@ input::-webkit-inner-spin-button {
 
     .logo {
         img {
-            width: 100%;
+            width: auto;
+            height: 90px;
         }
     }
 }
@@ -256,7 +267,7 @@ input::-webkit-inner-spin-button {
 .header-top {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .header-contact {
@@ -421,8 +432,8 @@ input::-webkit-inner-spin-button {
 
 .header-search {
     position: fixed;
-    top: 137px;
-    right: -350px;
+    top: 106px;
+    right: -360px;
     z-index: 90;
     background: $white;
     padding: 15px;
@@ -853,7 +864,7 @@ input::-webkit-inner-spin-button {
 }
 
 .recruit {
-    padding: 100px 0;
+    padding: 140px 0;
     background: url('images/img-main/bg-recruit.png') no-repeat top center / 100% 100%;
 }
 
@@ -1242,7 +1253,7 @@ input::-webkit-inner-spin-button {
 }
 
 .cat-name {
-    @include InterBold;
+    @include InterBlack;
     font-size: 4rem;
     background: linear-gradient(90deg, #53BFB8 2.85%, #0944A2 100%);
     -webkit-background-clip: text;
@@ -1287,8 +1298,7 @@ input::-webkit-inner-spin-button {
 
     img {
         width: 100%;
-        aspect-ratio: 4/3;
-        object-fit: contain;
+        height: auto;
     }
 }
 
@@ -1334,7 +1344,7 @@ input::-webkit-inner-spin-button {
 .formation-img {
     img {
         width: 100%;
-        aspect-ratio: 17/18;
+        height: auto;
     }
 }
 
@@ -1963,7 +1973,11 @@ input::-webkit-inner-spin-button {
 /* Responsive */
 @include maxWidth(1366px) {
     .header-search {
-        top: 118px;
+        top: 106px;
+    }
+
+    .recruit {
+        padding: 100px 0;
     }
 
     .motto-content {
@@ -2088,6 +2102,20 @@ input::-webkit-inner-spin-button {
                 text-transform: uppercase;
                 display: block;
                 padding: 8px 20px;
+            }
+        }
+
+        .hidden-lang {
+            display: block;
+            padding: .5rem;
+            border-bottom: 0;
+
+            a {
+                padding: .25rem 1rem !important;
+                border: 1px $white solid;
+                text-align: center;
+                margin: 0 .2rem;
+                background: $white;
             }
         }
     }
@@ -2301,7 +2329,7 @@ input::-webkit-inner-spin-button {
 
     .step-title {
         max-width: 100%;
-        margin: 0 100px 60px;
+        margin: 0 25% 60px;
 
         &::before {
             top: auto;
@@ -2362,13 +2390,13 @@ input::-webkit-inner-spin-button {
         font-size: 1.125rem;
 
         &::before {
-            width: 90%;
+            width: 75%;
             @include text-center;
         }
     }
 
     .title-small {
-        transform: translateX(100%);
+        transform: translateX(90%);
     }
 
     .sub-title {
@@ -2436,7 +2464,7 @@ input::-webkit-inner-spin-button {
     .header-search {
         top: 68px;
         width: 100%;
-        right: -100%;
+        right: -110%;
     }
 
     .menu-mb {
@@ -2454,7 +2482,7 @@ input::-webkit-inner-spin-button {
     }
 
     .article-intro {
-        width: 48%;
+        width: 100%;
         margin: 5px 1%;
         padding: .5rem;
     }
@@ -2635,6 +2663,10 @@ input::-webkit-inner-spin-button {
 
     .title-contact {
         font-size: 1rem;
+    }
+
+    .footer {
+        background-position: top left;
     }
 }
 

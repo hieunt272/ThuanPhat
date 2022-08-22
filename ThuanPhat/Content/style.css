@@ -9,6 +9,11 @@
   src: url("../webfonts/Inter-SemiBold.ttf") format("truetype");
 }
 @font-face {
+  font-family: "InterBlack";
+  font-display: swap;
+  src: url("../webfonts/Inter-Black.ttf") format("truetype");
+}
+@font-face {
   font-family: "Fester Bold";
   font-display: swap;
   src: url("../webfonts/Fester Bold.otf") format("opentype");
@@ -72,7 +77,7 @@ input::-webkit-inner-spin-button {
 }
 
 ::-webkit-scrollbar-track {
-  background: #fff;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -197,13 +202,14 @@ input::-webkit-inner-spin-button {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 .header .logo img {
-  width: 100%;
+  width: auto;
+  height: 90px;
 }
 
 .header-top {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .header-contact {
@@ -345,8 +351,8 @@ input::-webkit-inner-spin-button {
 
 .header-search {
   position: fixed;
-  top: 137px;
-  right: -350px;
+  top: 106px;
+  right: -360px;
   z-index: 90;
   background: #fff;
   padding: 15px;
@@ -728,7 +734,7 @@ input::-webkit-inner-spin-button {
 }
 
 .recruit {
-  padding: 100px 0;
+  padding: 140px 0;
   background: url("images/img-main/bg-recruit.png") no-repeat top center/100% 100%;
 }
 
@@ -1068,7 +1074,7 @@ input::-webkit-inner-spin-button {
 }
 
 .cat-name {
-  font-family: "InterBold";
+  font-family: "InterBlack";
   font-size: 4rem;
   background: linear-gradient(90deg, #53BFB8 2.85%, #0944A2 100%);
   -webkit-background-clip: text;
@@ -1109,8 +1115,7 @@ input::-webkit-inner-spin-button {
 }
 .about-img img {
   width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: contain;
+  height: auto;
 }
 
 .motto {
@@ -1148,7 +1153,7 @@ input::-webkit-inner-spin-button {
 
 .formation-img img {
   width: 100%;
-  aspect-ratio: 17/18;
+  height: auto;
 }
 
 .formation-content {
@@ -1699,7 +1704,11 @@ input::-webkit-inner-spin-button {
 /* Responsive */
 @media (max-width: 1366px) {
   .header-search {
-    top: 118px;
+    top: 106px;
+  }
+
+  .recruit {
+    padding: 100px 0;
   }
 
   .motto-content {
@@ -1807,6 +1816,18 @@ input::-webkit-inner-spin-button {
     text-transform: uppercase;
     display: block;
     padding: 8px 20px;
+  }
+  .nav-mb .hidden-lang {
+    display: block;
+    padding: 0.5rem;
+    border-bottom: 0;
+  }
+  .nav-mb .hidden-lang a {
+    padding: 0.25rem 1rem !important;
+    border: 1px #fff solid;
+    text-align: center;
+    margin: 0 0.2rem;
+    background: #fff;
   }
 
   .sub-nav-mb li {
@@ -1990,7 +2011,7 @@ input::-webkit-inner-spin-button {
 
   .step-title {
     max-width: 100%;
-    margin: 0 100px 60px;
+    margin: 0 25% 60px;
   }
   .step-title::before {
     top: auto;
@@ -2042,13 +2063,13 @@ input::-webkit-inner-spin-button {
     font-size: 1.125rem;
   }
   .title-section::before {
-    width: 90%;
+    width: 75%;
     left: 50%;
     transform: translateX(-50%);
   }
 
   .title-small {
-    transform: translateX(100%);
+    transform: translateX(90%);
   }
 
   .sub-title {
@@ -2103,7 +2124,7 @@ input::-webkit-inner-spin-button {
   .header-search {
     top: 68px;
     width: 100%;
-    right: -100%;
+    right: -110%;
   }
 
   .menu-mb {
@@ -2121,7 +2142,7 @@ input::-webkit-inner-spin-button {
   }
 
   .article-intro {
-    width: 48%;
+    width: 100%;
     margin: 5px 1%;
     padding: 0.5rem;
   }
@@ -2274,6 +2295,10 @@ input::-webkit-inner-spin-button {
 
   .title-contact {
     font-size: 1rem;
+  }
+
+  .footer {
+    background-position: top left;
   }
 }
 @keyframes jelly {
