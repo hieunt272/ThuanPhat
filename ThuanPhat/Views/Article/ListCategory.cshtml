@@ -5,6 +5,7 @@
         <th>Hình ảnh</th>
         <th>Tên danh mục</th>
         <th>Loại danh mục</th>
+        <th>Hiện trang chủ</th>
         <th>Hiện menu</th>
         <th>Hoạt động</th>
         <th style="width: 200px"></th>
@@ -24,6 +25,7 @@
                 </td>
                 <td class="left"><strong>@category.CategoryName</strong></td>
                 <td>@Html.DisplayFor(a => category.TypePost)</td>
+                <td>@Html.EditorFor(a => category.ShowHome, new { htmlAttributes = new { id = "Home" } })</td>
                 <td>@Html.EditorFor(a => category.ShowMenu, new { htmlAttributes = new { id = "Menu" } })</td>
                 <td>@Html.EditorFor(a => category.CategoryActive, new { htmlAttributes = new { id = "Active" } })</td>
                 <td>
@@ -47,6 +49,7 @@
                     </td>
                     <td class="left"><strong><i class="fal fa-window-minimize"></i> @child.CategoryName</strong></td>
                     <td>@Html.DisplayFor(a => child.TypePost)</td>
+                    <td>@Html.EditorFor(a => child.ShowHome, new { htmlAttributes = new { id = "Home" } })</td>
                     <td>@Html.EditorFor(a => child.ShowMenu, new { htmlAttributes = new { id = "Menu" } })</td>
                     <td>@Html.EditorFor(a => child.CategoryActive, new { htmlAttributes = new { id = "Active" } })</td>
                     <td>

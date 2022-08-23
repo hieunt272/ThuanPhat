@@ -126,6 +126,16 @@ namespace ThuanPhat.Controllers
                     }
                 }
                 category.Url = HtmlHelpers.ConvertToUnSign(null, category.Url ?? category.CategoryName);
+                category.CategoryName = model.CategoryName;
+                category.Description = model.Description;
+                category.CategorySort = model.CategorySort;
+                category.CategoryActive = model.CategoryActive;
+                category.ParentId = model.ParentId;
+                category.ShowMenu = model.ShowMenu;
+                category.ShowHome = model.ShowHome;
+                category.TitleMeta = model.TitleMeta;
+                category.DescriptionMeta = model.DescriptionMeta;
+                category.TypePost = model.TypePost;
                 category.AboutText = model.AboutText;
                 category.MottoText = model.MottoText;
                 category.FormationText = model.FormationText;
@@ -158,6 +168,8 @@ namespace ThuanPhat.Controllers
             }
             articleCat.CategorySort = sort;
             articleCat.CategoryActive = active;
+            articleCat.ShowMenu = menu;
+            articleCat.ShowHome = home;
 
             _unitOfWork.Save();
             return true;
@@ -424,6 +436,7 @@ namespace ThuanPhat.Controllers
                     article.Body = model.Article.Body;
                     article.Active = model.Article.Active;
                     article.Home = model.Article.Home;
+                    article.ShowMenu = model.Article.ShowMenu;
                     article.TitleMeta = model.Article.TitleMeta;
                     article.DescriptionMeta = model.Article.DescriptionMeta;
 

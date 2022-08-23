@@ -171,6 +171,12 @@
   <data name="ContentNotUpdate" xml:space="preserve">
     <value>Nội dung hiện chưa được cập nhật. Vui lòng quay lại sau</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Địa chỉ Email</value>
+  </data>
   <data name="Example" xml:space="preserve">
     <value>Ví dụ: 8:00 ~ 10:00</value>
   </data>

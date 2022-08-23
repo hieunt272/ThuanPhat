@@ -145,10 +145,10 @@
     <value>コンテンツ</value>
   </data>
   <data name="Call" xml:space="preserve">
-    <value>電話</value>
+    <value>メール</value>
   </data>
   <data name="Career" xml:space="preserve">
-    <value>希望するキャリア</value>
+    <value>希望職種</value>
   </data>
   <data name="ClickHere" xml:space="preserve">
     <value>ここをクリックして</value>
@@ -160,16 +160,22 @@
     <value>コンタクト</value>
   </data>
   <data name="ContactHour" xml:space="preserve">
-    <value>連絡時間</value>
+    <value>ご連絡可能な時間帯</value>
   </data>
   <data name="ContactMethod" xml:space="preserve">
-    <value>連絡方法</value>
+    <value>ご連絡方法</value>
   </data>
   <data name="ContactUs" xml:space="preserve">
     <value>お問い合わせ</value>
   </data>
   <data name="ContentNotUpdate" xml:space="preserve">
     <value>コンテンツはまだ更新されていません。 また後で来てください</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>お電話</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>メールアドレス</value>
   </data>
   <data name="Example" xml:space="preserve">
     <value>例：8:00～10:00</value>
@@ -181,7 +187,7 @@
     <value>形成と開発</value>
   </data>
   <data name="FullName" xml:space="preserve">
-    <value>名前と苗字</value>
+    <value>氏名</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>セックス</value>
@@ -244,7 +250,7 @@
     <value>検索結果はありません</value>
   </data>
   <data name="NumberPhone" xml:space="preserve">
-    <value>電話番号</value>
+    <value>お電話番号</value>
   </data>
   <data name="OutService" xml:space="preserve">
     <value>私たちのサービス</value>

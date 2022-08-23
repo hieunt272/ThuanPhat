@@ -53,22 +53,22 @@
                     <ul class="ul-reset nav">
                         @if (Model.IntroduceCatDto.Any(a => a.ParentId == null))
                         {
-                            foreach (var item in Model.IntroduceCatDto.Where(a => a.ParentId == null).Take(1))
+                            foreach (var category in Model.IntroduceCatDto.Where(a => a.ParentId == null).Take(1))
                             {
                                 <li>
                                     <a href="@Url.Action("Introduce", new { Culture })">
-                                        @item.CategoryName
+                                        @category.CategoryName
                                     </a>
-                                    @if (Model.IntroduceCatDto.Any(a => a.ParentId == item.Id))
+                                    @if (Model.ArticleDtos.Any(a => a.ArticleCategoryId == category.Id))
                                     {
                                         <i class="fas fa-caret-down"></i>
                                         <div class="drop">
                                             <ul class="ul-reset sub-nav">
-                                                @foreach (var child in Model.IntroduceCatDto.Where(a => a.ParentId == item.Id))
+                                                @foreach (var article in Model.ArticleDtos.Where(a => a.ArticleCategoryId == category.Id))
                                                 {
                                                     <li>
-                                                        <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })">
-                                                            @child.CategoryName
+                                                        <a href="@Url.Action("ArticleDetail", new { url = article.Url, Culture })">
+                                                            @article.Subject
                                                         </a>
                                                     </li>
                                                 }
@@ -78,33 +78,27 @@
                                 </li>
                             }
                         }
-                        @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
-                        {
-                            foreach (var item in Model.ServiceCategoryDtos.Where(a => a.ParentId == null))
+                        <li>
+                            <a href="@Url.Action("AllService", new { Culture })">
+                                Dịch vụ
+                            </a>
+                            @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
                             {
-                                <li>
-                                    <a href="@Url.Action("ServiceCategory", new { url = item.Url, Culture })">
-                                        @item.CategoryName
-                                    </a>
-                                    @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == item.Id))
-                                    {
-                                        <i class="fas fa-caret-down"></i>
-                                        <div class="drop">
-                                            <ul class="ul-reset sub-nav">
-                                                @foreach (var child in Model.ServiceCategoryDtos.Where(a => a.ParentId == item.Id))
-                                                {
-                                                    <li>
-                                                        <a href="@Url.Action("ServiceCategory", new { url = child.Url, Culture })">
-                                                            @child.CategoryName
-                                                        </a>
-                                                    </li>
-                                                }
-                                            </ul>
-                                        </div>
-                                    }
-                                </li>
+                                <i class="fas fa-caret-down"></i>
+                                <div class="drop">
+                                    <ul class="ul-reset sub-nav">
+                                        @foreach (var item in Model.ServiceCategoryDtos.Where(a => a.ParentId == null))
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("ServiceCategory", new { url = item.Url, Culture })">
+                                                    @item.CategoryName
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                             }
-                        }
+                        </li>
                         @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == null))
                         {
                             foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null))
@@ -186,22 +180,27 @@
         </form>
         <div class="menu-mb">
             <ul class="ul-reset nav-mb">
+                <li>
+                    <a href="@Url.Action("Index", new { Culture })">
+                        Trang chủ
+                    </a>
+                </li>
                 @if (Model.IntroduceCatDto.Any(a => a.ParentId == null))
                 {
-                    foreach (var item in Model.IntroduceCatDto.Where(a => a.ParentId == null))
+                    foreach (var category in Model.IntroduceCatDto.Where(a => a.ParentId == null))
                     {
                         <li>
                             <a href="@Url.Action("Introduce", new { Culture })">
-                                @item.CategoryName
+                                @category.CategoryName
                             </a>
-                            @if (Model.IntroduceCatDto.Any(a => a.ParentId == item.Id))
+                            @if (Model.ArticleDtos.Any(a => a.ArticleCategoryId == category.Id))
                             {
                                 <ul class="ul-reset sub-nav-mb">
-                                    @foreach (var child in Model.IntroduceCatDto.Where(a => a.ParentId == item.Id))
+                                    @foreach (var article in Model.ArticleDtos.Where(a => a.ArticleCategoryId == category.Id))
                                     {
                                         <li>
-                                            <a href="@Url.Action("ArticleCategory", "Home", new { url = child.Url, Culture })">
-                                                @child.CategoryName
+                                            <a href="@Url.Action("ArticleDetail", new { url = article.Url, Culture })">
+                                                @article.Subject
                                             </a>
                                         </li>
                                     }
@@ -210,36 +209,30 @@
                         </li>
                     }
                 }
-                @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
-                {
-                    foreach (var item in Model.ServiceCategoryDtos.Where(a => a.ParentId == null))
+                <li>
+                    <a href="@Url.Action("AllService", new { Culture })">
+                        Dịch vụ
+                    </a>
+                    @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
                     {
-                        <li>
-                            <a href="@Url.Action("ServiceCategory", "Home", new { url = item.Url, Culture })">
-                                @item.CategoryName
-                            </a>
-                            @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == item.Id))
+                        <ul class="ul-reset sub-nav-mb">
+                            @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null))
                             {
-                                <ul class="ul-reset sub-nav-mb">
-                                    @foreach (var child in Model.ServiceCategoryDtos.Where(a => a.ParentId == item.Id))
-                                    {
-                                        <li>
-                                            <a href="@Url.Action("ServiceCategory", "Home", new { url = child.Url, Culture })">
-                                                @child.CategoryName
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
+                                <li>
+                                    <a href="@Url.Action("ServiceCategory", new { url = item.Url, Culture })">
+                                        @item.CategoryName
+                                    </a>
+                                </li>
                             }
-                        </li>
+                        </ul>
                     }
-                }
+                </li>
                 @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == null))
                 {
                     foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null))
                     {
                         <li>
-                            <a href="@Url.Action("ArticleCategory", "Home", new { url = item.Url, Culture })">
+                            <a href="@Url.Action("ArticleCategory", new { url = item.Url, Culture })">
                                 @item.CategoryName
                             </a>
                             @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id))
@@ -248,7 +241,7 @@
                                     @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id))
                                     {
                                         <li>
-                                            <a href="@Url.Action("ArticleCategory", "Home", new { url = child.Url, Culture })">
+                                            <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })">
                                                 @child.CategoryName
                                             </a>
                                         </li>

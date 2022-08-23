@@ -28,19 +28,14 @@ namespace ThuanPhat.Controllers
         [Route(Order = 2)]
         public ActionResult Index()
         {
-            var categories = ArticleCategoryDtos().Where(p => p.ShowHome && p.ParentId == null && p.TypePost == TypePost.Training).Take(1);
-            var CategoriesItem = categories.Select(a => new HomeViewModel.CategoryItem
-            {
-                CategoryDto = a,
-                ArticleDtos = ArticleDtos().Where(p => 
-                    p.Active && a.ShowHome && (p.ArticleCategoryId == a.Id || p.ParentId == a.Id)).OrderByDescending(p => p.CreateDate).Take(12),
-            });
             var model = new HomeViewModel
             {
                 BannerDtos = BannerDtos(),
                 ArticleDtos = ArticleDtos().Where(a => a.Active && a.Home && a.TypePost == TypePost.Article).OrderByDescending(a => a.CreateDate).Take(15),
-                CategoryItems = CategoriesItem,
-                ServiceDtos = ServiceDtos().Where(a => a.Active && a.Home).OrderByDescending(a => a.CreateDate).Take(3),
+                TrainingDtos = ArticleDtos().Where(a => a.Active && a.Home).OrderByDescending(a => a.CreateDate).Take(5),
+                TrainingCatDtos = ArticleCategoryDtos().Where(a => a.CategoryActive && a.ShowHome && a.TypePost == TypePost.Training).OrderBy(a => a.CategorySort),
+                ServiceDtos = ServiceDtos().Where(a => a.Active && a.Home).OrderByDescending(a => a.CreateDate),
+                ServiceCategoryDtos = ServiceCategoryDtos().Where(a => a.CategoryActive && a.ShowHome && a.ParentId == null).OrderBy(a => a.CategorySort).Take(3),
                 IntroduceDtos = ArticleDtos().Where(a => a.Active && a.Home && a.TypePost == TypePost.Introduce).OrderByDescending(a => a.CreateDate).Take(4),
                 RecruitDto = ArticleCategoryDtos().Where(a => a.ShowHome && a.TypePost == TypePost.Recruit).FirstOrDefault(),
                 ConfigSiteDto = ConfigSiteDto(),
@@ -56,6 +51,7 @@ namespace ThuanPhat.Controllers
                 IntroduceCatDto = ArticleCategoryDtos().Where(a => a.ShowMenu && a.TypePost == TypePost.Introduce),
                 ServiceCategoryDtos = ServiceCategoryDtos().Where(a => a.ShowMenu),
                 ConfigSiteDto = ConfigSiteDto(),
+                ArticleDtos = ArticleDtos().Where(a => a.Active && a.ShowMenu)
             };
             return PartialView(model);
         }

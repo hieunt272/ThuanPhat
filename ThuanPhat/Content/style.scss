@@ -662,8 +662,9 @@ input::-webkit-inner-spin-button {
         z-index: 1;
     }
 
-    .subject {
+    .service-name {
         -webkit-line-clamp: 1;
+        margin-bottom: 25px;
 
         a {
             color: $white;
@@ -672,33 +673,40 @@ input::-webkit-inner-spin-button {
         }
     }
 
-    .desc {
-        margin-top: 25px;
-        color: $white;
+    .service-list {
+        padding: 0;
+        margin: 0;
 
-        ul {
-            padding: 0;
-            margin: 0;
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            list-style: none;
 
-            li {
-                position: relative;
-                padding-left: 20px;
-                margin-bottom: 10px;
-                list-style: none;
+            &:last-child {
+                margin-bottom: 0;
+            }
 
-                &:last-child {
-                    margin-bottom: 0;
-                }
-
-                &::before {
-                    @include before(10px, 10px);
-                    top: 50%;
-                    left: 0;
-                    transform: translateY(-50%);
-                    background: $white;
+            &::before {
+                @include before(10px, 10px);
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                background: $white;
+            }
+            a {
+                color: $white;
+                &:hover {
+                    color: $blue;
                 }
             }
         }
+    }
+
+    .desc {
+        -webkit-line-clamp: 3;
+        color: $white;
+        height: 72px;
     }
 }
 
@@ -1775,7 +1783,6 @@ input::-webkit-inner-spin-button {
 
 .contact {
     padding: 40px 0;
-    background: #f5f5f5;
 
     .title {
         color: #000;
@@ -1786,32 +1793,25 @@ input::-webkit-inner-spin-button {
     }
 }
 
-.info-us {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-
-    .label {
-        color: $blue;
-        @include InterBold;
-        min-width: 100px;
-    }
-
-    a {
-        color: $gray;
-    }
+.box-contact {
+    border-top: 6px solid $blue;
+    padding: 0 48px 0 16px;
 }
 
 .contact-form {
     padding: 20px;
-    border-radius: 10px;
     background: $white;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, .2);
+    box-shadow: 0 12px 22px 0 rgb(0 0 0 / 7%);
+
+    label {
+        @include InterBold;
+    }
 
     .form-control {
         height: 40px;
         box-shadow: none;
         margin-bottom: 20px;
+        font-size: .875rem;
     }
 
     textarea {
@@ -1838,10 +1838,11 @@ input::-webkit-inner-spin-button {
         width: 100%;
         margin-top: 15px;
         border: 0;
-        border-radius: 5px;
+        border-radius: 8px;
         color: $white;
-        padding: 8px;
+        padding: 12px;
         background: $gradient;
+        @include InterBold;
         background-size: 200% 400%;
         animation: gradient 5s infinite cubic-bezier(.62, .28, .23, .99) both;
     }
@@ -1853,14 +1854,31 @@ input::-webkit-inner-spin-button {
     font-size: 1.25rem;
     text-transform: uppercase;
     @include InterBold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.color-base {
+    font-size: 1.375rem;
+    color: $blue;
+    i {
+        font-size: 1.125rem;
+        margin-right: 5px;
+    }
+}
+
+.contact-info {
+    color: #000;
+    margin: 8px 0 16px;
+
+    a {
+        color: #007bff;
+    }
 }
 
 .map {
     margin-top: 30px;
-    border-radius: 10px;
-    height: 500px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, .2);
+    height: auto;
+    box-shadow: 0 12px 22px 0 rgb(0 0 0 / 7%);
 }
 
 .bg-second {
@@ -2369,7 +2387,7 @@ input::-webkit-inner-spin-button {
     }
 
     .contact-form {
-        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     .recruit-form {
@@ -2507,6 +2525,7 @@ input::-webkit-inner-spin-button {
 
         .desc {
             margin-top: 15px;
+            height: 64px;
         }
     }
 
@@ -2663,6 +2682,17 @@ input::-webkit-inner-spin-button {
 
     .title-contact {
         font-size: 1rem;
+    }
+
+    .box-contact {
+        padding: 0;
+    }
+
+    .color-base {
+        font-size: 1rem;
+        i {
+            font-size: .875rem;
+        }
     }
 
     .footer {

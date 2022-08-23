@@ -28,7 +28,7 @@ namespace ThuanPhat.Models
         public string TitleMeta { get; set; }
         [Display(Name = "Thẻ mô tả"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]
         public string DescriptionMeta { get; set; }
-        [Display(Name = "Ảnh bìa"), StringLength(500)]
+        [Display(Name = "Ảnh đại diện"), StringLength(500)]
         public string Image { get; set; }
         [Display(Name = "Ảnh giới thiệu"), StringLength(500)]
         public string AboutImage { get; set; }

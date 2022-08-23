@@ -14,16 +14,12 @@ namespace ThuanPhat.ViewModel
         public IEnumerable<BannerDto> BannerDtos { get; set; }
         public IEnumerable<ArticleDto> ArticleDtos { get; set; }
         public IEnumerable<ArticleDto> IntroduceDtos { get; set; }
+        public IEnumerable<ArticleDto> TrainingDtos { get; set; }
         public IEnumerable<ServiceDto> ServiceDtos { get; set; }
+        public IEnumerable<ServiceCategoryDto> ServiceCategoryDtos { get; set; }
         public ArticleCategoryDto RecruitDto { get; set; }
         public ConfigSiteDto ConfigSiteDto { get; set; }
-        public IEnumerable<CategoryItem> CategoryItems { get; set; }
-
-        public class CategoryItem
-        {
-            public ArticleCategoryDto CategoryDto { get; set; }
-            public IEnumerable<ArticleDto> ArticleDtos { get; set; }
-        }
+        public IEnumerable<ArticleCategoryDto> TrainingCatDtos { get; set; } 
     }
 
     public class HeaderViewModel 
@@ -32,6 +28,7 @@ namespace ThuanPhat.ViewModel
         public IEnumerable<ArticleCategoryDto> IntroduceCatDto { get; set; }
         public IEnumerable<ServiceCategoryDto> ServiceCategoryDtos { get; set; }
         public ConfigSiteDto ConfigSiteDto { get; set; }
+        public IEnumerable<ArticleDto> ArticleDtos { get; set; } 
     }
 
     public class FooteViewModel

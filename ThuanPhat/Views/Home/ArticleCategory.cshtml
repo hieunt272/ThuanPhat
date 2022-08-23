@@ -6,7 +6,7 @@
     ViewBag.Canonical = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleCategory", "Home", new { url = Model.CategoryDto.Url, Culture });
 }
 
-<section class="banner-cat banner-article" @if (Model.CategoryDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/articleCategory/", Model.CategoryDto.Image) + ")'") }>
+<section class="banner-cat banner-article">
     <div class="container">
         <div class="cat-name">
             @Model.CategoryDto.CategoryName

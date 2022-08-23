@@ -70,10 +70,12 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    @Html.LabelFor(m => m.Recruit.Email)
+                    <label for="Recruit_Email">
+                        @Resources.EmailAddress
+                    </label>
                 </div>
                 <div class="col-lg-8 col-md-8">
-                    @Html.TextBoxFor(m => m.Recruit.Email, new { @class = "form-control", placeholder = "Email" })
+                    @Html.TextBoxFor(m => m.Recruit.Email, new { @class = "form-control", placeholder = Resources.Email })
                     @Html.ValidationMessageFor(m => m.Recruit.Email)
                 </div>
                 <div class="col-lg-4 col-md-4">
@@ -94,7 +96,7 @@
                         </label>
                         <label>
                             <input type="radio" name="Recruit.ContactMethod" value="2" />
-                            <span>Email</span>
+                            <span>@Resources.Email</span>
                         </label>
                     </div>
                 </div>

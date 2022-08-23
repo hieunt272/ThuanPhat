@@ -13,7 +13,7 @@ namespace ThuanPhat.Models
          Required(ErrorMessage = "Hãy nhập tiêu đề"), StringLength(150, ErrorMessage = "Tối đa 150 ký tự"),
          UIHint("TextBox")]
         public string ServiceName { get; set; }
-        [Display(Name = "Trích dẫn ngắn"), Required(ErrorMessage = "Hãy nhập trích dẫn ngắn"), UIHint("EditorBox")]
+        [Display(Name = "Trích dẫn ngắn"), Required(ErrorMessage = "Hãy nhập trích dẫn ngắn"), UIHint("TextArea")]
         public string Description { get; set; }
         [Display(Name = "Nội dung"), UIHint("EditorBox")]
         public string Body { get; set; }
@@ -54,7 +54,7 @@ namespace ThuanPhat.Models
         public int LanguageId { get; set; }
         [StringLength(150, ErrorMessage = "Tối đa 100 ký tự"), UIHint("TextBox")]
         public string ServiceName { get; set; }
-        [Display(Name = "Trích dẫn ngắn"), UIHint("EditorBox")]
+        [Display(Name = "Trích dẫn ngắn"), UIHint("TextArea")]
         public string Description { get; set; }
         [Display(Name = "Nội dung"), UIHint("EditorBox")]
         public string Body { get; set; }

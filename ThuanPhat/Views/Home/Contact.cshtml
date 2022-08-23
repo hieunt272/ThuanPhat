@@ -20,65 +20,66 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="box-border shadow h-100">
-                    <div class="title">
-                        @Resources.InfoContactUs
-                    </div>
-                    <div class="info-us">
-                        <div class="label">
-                            @Resources.Place:
+                <div class="box-contact">
+                    <form class="contact-form">
+                        <div class="title-contact">
+                            @Resources.InfoFull
                         </div>
-                        <span>
-                            @config.Place
-                        </span>
-                    </div>
-                    <div class="info-us">
-                        <div class="label">
-                            @Resources.IncName:
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+                        <div>
+                            <label for="Contact_FullName">@Resources.FullName</label>
+                            @Html.TextBoxFor(model => model.Contact.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
+                            @Html.ValidationMessageFor(model => model.Contact.FullName)
                         </div>
-                        <span>
-                            @config.Title
-                        </span>
-                    </div>
-                    <div class="info-us">
-                        <div class="label">
-                            Email:
+                        <div>
+                            <label for="Contact_Mobile">@Resources.Mobile</label>
+                            @Html.TextBoxFor(model => model.Contact.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.Mobile })
+                            @Html.ValidationMessageFor(model => model.Contact.Mobile)
                         </div>
-                        <a href="mailto:@config.Email">
-                            @config.Email
-                        </a>
-                    </div>
-                    <div class="info-us">
-                        <div class="label">
-                            Hotline:
+                        <div>
+                            <label for="Contact_Email">@Resources.Email</label>
+                            @Html.TextBoxFor(model => model.Contact.Email, new { @class = "form-control", @placeholder = Resources.Email })
+                            @Html.ValidationMessageFor(model => model.Contact.Email)
                         </div>
-                        <a href="tel:@config.Hotline">
-                            @config.Hotline
-                        </a>
-                    </div>
+                        <div>
+                            <label for="Contact_Body">@Resources.Body</label>
+                            @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Message })
+                            @Html.ValidationMessageFor(model => model.Contact.Body)
+                        </div>
+                        <button type="submit" class="btn-contact">
+                            <span>@Resources.SendContact</span>
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-6">
-                <form class="contact-form">
-                    <div class="title-contact">
-                        @Resources.InfoFull
-                    </div>
-                    @Html.ValidationSummary(true)
-                    @Html.AntiForgeryToken()
-                    @Html.TextBoxFor(model => model.Contact.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
-                    @Html.ValidationMessageFor(model => model.Contact.FullName)
-                    @Html.TextBoxFor(model => model.Contact.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.Mobile })
-                    @Html.ValidationMessageFor(model => model.Contact.Mobile)
-                    @Html.TextBoxFor(model => model.Contact.Email, new { @class = "form-control", @placeholder = "Email" })
-                    @Html.ValidationMessageFor(model => model.Contact.Email)
-                    @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Message })
-                    @Html.ValidationMessageFor(model => model.Contact.Body)
-                    <button type="submit" class="btn-contact">
-                        <span>@Resources.SendContact</span>
-                    </button>
-                </form>
-            </div>
-            <div class="col-lg-12">
+                <div class="color-base">
+                    <i class="fas fa-map-marker-alt"></i>
+                    @Resources.Place
+                </div>
+                <div class="contact-info">
+                    @config.Place
+                </div>
+                <div class="color-base">
+                    <i class="fas fa-phone-alt"></i>
+                    @Resources.Mobile
+                </div>
+                <div class="contact-info">
+                    <a href="tel:@config.Hotline">
+                        @config.Hotline
+                    </a>
+                </div>
+                <div class="color-base">
+                    <i class="fas fa-envelope"></i>
+                    @Resources.Email
+                </div>
+                <div class="contact-info">
+                    <a href="mailto:@config.Email">
+                        @config.Email
+                    </a>
+                </div>
+
                 @if (config.GoogleMap != null)
                 {
                     <div class="embed-responsive embed-responsive-16by9 map">

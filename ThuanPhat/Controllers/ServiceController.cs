@@ -103,8 +103,9 @@ namespace ThuanPhat.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult UpdateCategory(ServiceCatViewModel category, FormCollection fc)
+        public ActionResult UpdateCategory(ServiceCatViewModel model, FormCollection fc)
         {
+            var category = _unitOfWork.ServiceCategoryRepository.GetById(model.ServiceCategory.Id);
             if (ModelState.IsValid)
             {
                 var isPost = true;
@@ -130,21 +131,32 @@ namespace ThuanPhat.Controllers
                             HtmlHelpers.CreateFolder(Server.MapPath(imgPath));
                             var imgFileName = DateTime.Now.ToFileTimeUtc() + Path.GetExtension(file.FileName);
 
-                            category.ServiceCategory.Image = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
+                            category.Image = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
                             file.SaveAs(Server.MapPath(Path.Combine(imgPath, imgFileName)));
                         }
                     }
                 }
+
                 if (isPost)
                 {
-                    category.ServiceCategory.Url = HtmlHelpers.ConvertToUnSign(null, category.ServiceCategory.Url ?? category.ServiceCategory.CategoryName);
-                    _unitOfWork.ServiceCategoryRepository.Update(category.ServiceCategory);
+                    category.Url = HtmlHelpers.ConvertToUnSign(null, category.Url ?? category.CategoryName);
+                    category.CategoryName = model.ServiceCategory.CategoryName;
+                    category.Description = model.ServiceCategory.Description;
+                    category.CategorySort = model.ServiceCategory.CategorySort;
+                    category.CategoryActive = model.ServiceCategory.CategoryActive;
+                    category.ParentId = model.ServiceCategory.ParentId;
+                    category.ShowHome = model.ServiceCategory.ShowHome;
+                    category.ShowMenu = model.ServiceCategory.ShowMenu;
+                    category.TitleMeta = model.ServiceCategory.TitleMeta;
+                    category.DescriptionMeta = model.ServiceCategory.DescriptionMeta;
+
+                    _unitOfWork.ServiceCategoryRepository.Update(category);
                     _unitOfWork.Save();
 
-                    var count = _unitOfWork.ServiceCategoryRepository.GetQuery(a => a.Url == category.ServiceCategory.Url).Count();
+                    var count = _unitOfWork.ServiceCategoryRepository.GetQuery(a => a.Url == category.Url).Count();
                     if (count > 1)
                     {
-                        category.ServiceCategory.Url += "-" + category.ServiceCategory.Id;
+                        category.Url += "-" + category.Id;
                         _unitOfWork.Save();
                     }
 
@@ -167,7 +179,7 @@ namespace ThuanPhat.Controllers
             _unitOfWork.Save();
             return true;
         }
-        public bool UpdateServiceCat(int sort = 1, bool active = false, bool menu = false, int serviceCatId = 0)
+        public bool UpdateServiceCat(int sort = 1, bool active = false, bool home = false, bool menu = false, int serviceCatId = 0)
         {
 
             var serviceCat = _unitOfWork.ServiceCategoryRepository.GetById(serviceCatId);
@@ -178,6 +190,7 @@ namespace ThuanPhat.Controllers
             serviceCat.CategorySort = sort;
             serviceCat.CategoryActive = active;
             serviceCat.ShowMenu = menu;
+            serviceCat.ShowHome = home;
             _unitOfWork.Save();
             return true;
         }

@@ -28,6 +28,8 @@ namespace ThuanPhat.Models
         public bool Active { get; set; }
         [Display(Name = "Hiện trang chủ")]
         public bool Home { get; set; }
+        [Display(Name = "Hiện menu")]
+        public bool ShowMenu { get; set; }
         [StringLength(300)]
         public string Url { get; set; }
         [Display(Name = "Thẻ tiêu đề"), StringLength(100, ErrorMessage = "Tối đa 100 ký tự"), UIHint("TextBox")]
@@ -79,6 +81,7 @@ namespace ThuanPhat.Models
         public int ArticleCategoryId { get; set; }
         public int? ParentId { get; set; }
         public bool Home { get; set; }
+        public bool ShowMenu { get; set; }
         public bool Active { get; set; }
         public string Url { get; set; }
         public string TitleMeta { get; set; }

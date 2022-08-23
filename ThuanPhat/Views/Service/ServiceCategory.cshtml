@@ -42,6 +42,10 @@
                         <td class="form_text">@Html.EditorFor(model => model.ServiceCategory.CategorySort)</td>
                     </tr>
                     <tr>
+                        <td class="form_name">@Html.LabelFor(model => model.ServiceCategory.ShowHome)</td>
+                        <td class="form_text">@Html.EditorFor(model => model.ServiceCategory.ShowHome)</td>
+                    </tr>
+                    <tr>
                         <td class="form_name">@Html.LabelFor(model => model.ServiceCategory.ShowMenu)</td>
                         <td class="form_text">@Html.EditorFor(model => model.ServiceCategory.ShowMenu)</td>
                     </tr>

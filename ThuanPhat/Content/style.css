@@ -549,32 +549,29 @@ input::-webkit-inner-spin-button {
   padding: 20px;
   z-index: 1;
 }
-.service-item .subject {
+.service-item .service-name {
   -webkit-line-clamp: 1;
+  margin-bottom: 25px;
 }
-.service-item .subject a {
+.service-item .service-name a {
   color: #fff;
   font-size: 1.125rem;
   font-family: "InterBold";
 }
-.service-item .desc {
-  margin-top: 25px;
-  color: #fff;
-}
-.service-item .desc ul {
+.service-item .service-list {
   padding: 0;
   margin: 0;
 }
-.service-item .desc ul li {
+.service-item .service-list li {
   position: relative;
   padding-left: 20px;
   margin-bottom: 10px;
   list-style: none;
 }
-.service-item .desc ul li:last-child {
+.service-item .service-list li:last-child {
   margin-bottom: 0;
 }
-.service-item .desc ul li::before {
+.service-item .service-list li::before {
   content: "";
   position: absolute;
   width: 10px;
@@ -583,6 +580,17 @@ input::-webkit-inner-spin-button {
   left: 0;
   transform: translateY(-50%);
   background: #fff;
+}
+.service-item .service-list li a {
+  color: #fff;
+}
+.service-item .service-list li a:hover {
+  color: #0880C1;
+}
+.service-item .desc {
+  -webkit-line-clamp: 3;
+  color: #fff;
+  height: 72px;
 }
 
 .training {
@@ -1528,7 +1536,6 @@ input::-webkit-inner-spin-button {
 
 .contact {
   padding: 40px 0;
-  background: #f5f5f5;
 }
 .contact .title {
   color: #000;
@@ -1538,30 +1545,24 @@ input::-webkit-inner-spin-button {
   font-family: "InterBold";
 }
 
-.info-us {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.info-us .label {
-  color: #0880C1;
-  font-family: "InterBold";
-  min-width: 100px;
-}
-.info-us a {
-  color: #666666;
+.box-contact {
+  border-top: 6px solid #0880C1;
+  padding: 0 48px 0 16px;
 }
 
 .contact-form {
   padding: 20px;
-  border-radius: 10px;
   background: #fff;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 22px 0 rgba(0, 0, 0, 0.07);
+}
+.contact-form label {
+  font-family: "InterBold";
 }
 .contact-form .form-control {
   height: 40px;
   box-shadow: none;
   margin-bottom: 20px;
+  font-size: 0.875rem;
 }
 .contact-form textarea {
   width: 100%;
@@ -1583,10 +1584,11 @@ input::-webkit-inner-spin-button {
   width: 100%;
   margin-top: 15px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 8px;
   color: #fff;
-  padding: 8px;
+  padding: 12px;
   background: linear-gradient(90deg, #53BFB8 2.85%, #0944A2 100%);
+  font-family: "InterBold";
   background-size: 200% 400%;
   animation: gradient 5s infinite cubic-bezier(0.62, 0.28, 0.23, 0.99) both;
 }
@@ -1597,14 +1599,30 @@ input::-webkit-inner-spin-button {
   font-size: 1.25rem;
   text-transform: uppercase;
   font-family: "InterBold";
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.color-base {
+  font-size: 1.375rem;
+  color: #0880C1;
+}
+.color-base i {
+  font-size: 1.125rem;
+  margin-right: 5px;
+}
+
+.contact-info {
+  color: #000;
+  margin: 8px 0 16px;
+}
+.contact-info a {
+  color: #007bff;
 }
 
 .map {
   margin-top: 30px;
-  border-radius: 10px;
-  height: 500px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  height: auto;
+  box-shadow: 0 12px 22px 0 rgba(0, 0, 0, 0.07);
 }
 
 .bg-second {
@@ -2044,7 +2062,7 @@ input::-webkit-inner-spin-button {
   }
 
   .contact-form {
-    margin-top: 30px;
+    margin-bottom: 30px;
   }
 
   .recruit-form {
@@ -2160,6 +2178,7 @@ input::-webkit-inner-spin-button {
   }
   .service-item .desc {
     margin-top: 15px;
+    height: 64px;
   }
 
   .training-list {
@@ -2295,6 +2314,17 @@ input::-webkit-inner-spin-button {
 
   .title-contact {
     font-size: 1rem;
+  }
+
+  .box-contact {
+    padding: 0;
+  }
+
+  .color-base {
+    font-size: 1rem;
+  }
+  .color-base i {
+    font-size: 0.875rem;
   }
 
   .footer {

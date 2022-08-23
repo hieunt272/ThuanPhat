@@ -89,7 +89,7 @@
         </div>
     </div>
 </section>
-@if (Model.ServiceDtos.Any())
+@if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
 {
     var delay = 200;
     <section class="service">
@@ -106,10 +106,43 @@
                 @Resources.SubTitleService
             </div>
             <div class="row">
-                @foreach (var item in Model.ServiceDtos)
+                @foreach (var category in Model.ServiceCategoryDtos)
                 {
                     <div class="col-lg-4 col-12" data-aos="flip-left" data-aos-duration="700" data-aos-delay="@delay">
-                        @Html.Partial("_ServiceItem", item)
+                        <div class="service-item">
+                            <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })">
+                                @if (category.Image != null)
+                                {
+                                    <img data-src="@Path.Combine("/images/serviceCategory/", category.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@category.CategoryName" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@category.CategoryName" />
+                                }
+                            </a>
+                            <div class="body">
+                                <div class="service-name truncate">
+                                    <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })" title="@category.CategoryName">
+                                        @category.CategoryName
+                                    </a>
+                                </div>
+                                @if (Model.ServiceDtos.Any(a => a.ServiceCategoryId == category.Id))
+                                {
+                                    <ul class="service-list">
+                                        @foreach (var item in Model.ServiceDtos.Where(a => a.ServiceCategoryId == category.Id))
+                                        {
+                                            <li>
+                                                <div class="service-subject truncate">
+                                                    <a href="@Url.Action("ServiceDetail", new { url = item.Url })">
+                                                        @item.ServiceName
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                        </div>
                     </div>
                     delay += 100;
                 }
@@ -125,53 +158,53 @@
         </div>
     </section>
 }
-@if (Model.CategoryItems.Any())
+@if (Model.TrainingCatDtos.Any(a => a.ParentId == null))
 {
-    <section class="training">
-        <div class="container">
-            @foreach (var categoty in Model.CategoryItems)
-            {
+    foreach (var item in Model.TrainingCatDtos.Where(a => a.ParentId == null))
+    {
+        <section class="training">
+            <div class="container">
                 <div class="text-center">
                     <div class="title-section" data-aos="fade-right" data-aos-duration="700">
-                        @categoty.CategoryDto.CategoryName
+                        @item.CategoryName
                         <div class="title-small">
                             trainings
                         </div>
                     </div>
                 </div>
-                if (categoty.CategoryDto.Description != null)
+                @if (item.Description != null)
                 {
                     <div class="sub-title" data-aos="fade-up" data-aos-duration="700">
-                        @categoty.CategoryDto.Description
+                        @item.Description
                     </div>
                 }
-                if (categoty.ArticleDtos.Any())
+                @if (Model.TrainingCatDtos.Any(a => a.ParentId == item.Id))
                 {
                     var delay = 200;
                     <div class="training-list">
-                        @foreach (var item in categoty.ArticleDtos)
+                        @foreach (var child in Model.TrainingCatDtos.Where(a => a.ParentId == item.Id))
                         {
                             <div class="training-item" data-aos="fade-up-right" data-aos-duration="700" data-aos-delay="@delay">
                                 <div class="number">
                                     @number
                                 </div>
                                 <div class="training-img">
-                                    <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })">
-                                        @if (item.Image != null)
+                                    <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })">
+                                        @if (child.Image != null)
                                         {
-                                            <img data-src="@Path.Combine("/images/articles/", item.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@item.Subject" />
+                                            <img data-src="@Path.Combine("/images/articleCategory/", child.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@child.CategoryName" />
                                         }
                                     </a>
                                 </div>
                                 <div class="subject truncate">
-                                    <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" title="@item.Subject">
-                                        @item.Subject
+                                    <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })" title="@child.CategoryName">
+                                        @child.CategoryName
                                     </a>
                                 </div>
                                 <div class="desc truncate">
-                                    @item.Description
+                                    @child.Description
                                 </div>
-                                <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })" class="btn-article">
+                                <a href="@Url.Action("ArticleCategory", new { url = child.Url, Culture })" class="btn-article">
                                     <span>
                                         @Resources.MoreInfo
                                     </span>
@@ -183,9 +216,9 @@
                         }
                     </div>
                 }
-            }
-        </div>
-    </section>
+            </div>
+        </section>
+    }
 }
 @if (Model.RecruitDto != null)
 {
