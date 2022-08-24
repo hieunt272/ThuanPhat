@@ -80,7 +80,7 @@
                         }
                         <li>
                             <a href="@Url.Action("AllService", new { Culture })">
-                                Dịch vụ
+                                @Resources.Service
                             </a>
                             @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
                             {
@@ -182,7 +182,7 @@
             <ul class="ul-reset nav-mb">
                 <li>
                     <a href="@Url.Action("Index", new { Culture })">
-                        Trang chủ
+                        @Resources.Home
                     </a>
                 </li>
                 @if (Model.IntroduceCatDto.Any(a => a.ParentId == null))
@@ -211,7 +211,7 @@
                 }
                 <li>
                     <a href="@Url.Action("AllService", new { Culture })">
-                        Dịch vụ
+                        @Resources.Service
                     </a>
                     @if (Model.ServiceCategoryDtos.Any(a => a.ParentId == null))
                     {

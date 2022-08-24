@@ -177,6 +177,9 @@
   <data name="EmailAddress" xml:space="preserve">
     <value>Địa chỉ Email</value>
   </data>
+  <data name="Examination" xml:space="preserve">
+    <value>Thi tuyển</value>
+  </data>
   <data name="Example" xml:space="preserve">
     <value>Ví dụ: 8:00 ~ 10:00</value>
   </data>
@@ -212,9 +215,6 @@
   </data>
   <data name="Japanese" xml:space="preserve">
     <value>Tiếng Nhật</value>
-  </data>
-  <data name="JobIntro" xml:space="preserve">
-    <value>Giới thiệu việc làm</value>
   </data>
   <data name="Keyword" xml:space="preserve">
     <value>Từ khóa</value>

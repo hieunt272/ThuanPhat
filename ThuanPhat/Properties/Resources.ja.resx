@@ -177,6 +177,9 @@
   <data name="EmailAddress" xml:space="preserve">
     <value>メールアドレス</value>
   </data>
+  <data name="Examination" xml:space="preserve">
+    <value>検査</value>
+  </data>
   <data name="Example" xml:space="preserve">
     <value>例：8:00～10:00</value>
   </data>
@@ -212,9 +215,6 @@
   </data>
   <data name="Japanese" xml:space="preserve">
     <value>日本</value>
-  </data>
-  <data name="JobIntro" xml:space="preserve">
-    <value>お仕事紹介</value>
   </data>
   <data name="Keyword" xml:space="preserve">
     <value>キーワード</value>

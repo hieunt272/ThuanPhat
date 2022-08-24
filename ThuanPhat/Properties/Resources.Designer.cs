@@ -241,6 +241,15 @@ namespace ThuanPhat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thi tuyển.
+        /// </summary>
+        public static string Examination {
+            get {
+                return ResourceManager.GetString("Examination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ví dụ: 8:00 ~ 10:00.
         /// </summary>
         public static string Example {
@@ -345,15 +354,6 @@ namespace ThuanPhat.Properties {
         public static string Japanese {
             get {
                 return ResourceManager.GetString("Japanese", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Giới thiệu việc làm.
-        /// </summary>
-        public static string JobIntro {
-            get {
-                return ResourceManager.GetString("JobIntro", resourceCulture);
             }
         }
         
