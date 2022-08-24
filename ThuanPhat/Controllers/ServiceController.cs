@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ThuanPhat.DAL;
 using ThuanPhat.Models;
@@ -164,7 +163,7 @@ namespace ThuanPhat.Controllers
                 }
             }
             ViewBag.RootCats = new SelectList(_unitOfWork.ServiceCategoryRepository.Get(a => a.ParentId == null, q => q.OrderBy(a => a.CategorySort)), "Id", "CategoryName");
-            return View(category);
+            return View(model);
         }
         [HttpPost]
         public bool DeleteCategory(int catId = 0)

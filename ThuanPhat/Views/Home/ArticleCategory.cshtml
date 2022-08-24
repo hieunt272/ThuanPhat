@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = Model.CategoryDto.TitleMeta ?? Model.CategoryDto.CategoryName;
     ViewBag.Description = Model.CategoryDto.DescriptionMeta ?? Model.CategoryDto.Description;
-    ViewBag.Canonical = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleCategory", "Home", new { url = Model.CategoryDto.Url, Culture });
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleCategory", "Home", new { url = Model.CategoryDto.Url, Culture });
 }
 
 <section class="banner-cat banner-article">

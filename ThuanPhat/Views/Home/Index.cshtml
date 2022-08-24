@@ -23,7 +23,7 @@
                 <img data-src="@Path.Combine("/images/banners/", banner.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@banner.BannerName" />
             }
         </div>
-        @if (Model.BannerDtos.Where(a => a.GroupId == 1).Count() > 1)
+        @if (Model.BannerDtos.Count(a => a.GroupId == 1) > 1)
         {
             <div class="contntes">
                 <div class="prev slick-arrow">

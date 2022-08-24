@@ -13,9 +13,9 @@ namespace ThuanPhat.Controllers
     {
         public readonly UnitOfWork _unitOfWork = new UnitOfWork();
 
-        public IEnumerable<ArticleCategoryDto> ArticleCategoryDtos()
+        public IQueryable<ArticleCategoryDto> ArticleCategoryDtos()
         {
-            IEnumerable<ArticleCategoryDto> articleCategoryDtos;
+            IQueryable<ArticleCategoryDto> articleCategoryDtos;
             switch (CultureInfo.CurrentCulture.Name)
             {
                 case "ja":
@@ -171,9 +171,9 @@ namespace ThuanPhat.Controllers
             }
             return bannerDtos;
         }
-        public IEnumerable<ServiceCategoryDto> ServiceCategoryDtos()
+        public IQueryable<ServiceCategoryDto> ServiceCategoryDtos()
         {
-            IEnumerable<ServiceCategoryDto> serviceCategoryDtos;
+            IQueryable<ServiceCategoryDto> serviceCategoryDtos;
             switch (CultureInfo.CurrentCulture.Name)
             {
                 case "ja":

@@ -2,7 +2,7 @@
 
 <div class="article-item">
     <div class="training-img">
-        <a href="@Url.Action("ArticleDetail", new { url = Model.Url, Culture })">
+        <a href="@Url.Action("ArticleDetail", "Home", new { url = Model.Url, Culture })">
             @if (Model.Image != null)
             {
                 <img data-src="@Path.Combine("/images/articles/", Model.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@Model.Subject" />
@@ -14,14 +14,14 @@
         </a>
     </div>
     <div class="subject truncate">
-        <a href="@Url.Action("ArticleDetail", new { url = Model.Url, Culture })" title="@Model.Subject">
+        <a href="@Url.Action("ArticleDetail", "Home", new { url = Model.Url, Culture })" title="@Model.Subject">
             @Model.Subject
         </a>
     </div>
     <div class="desc truncate">
         @Model.Description
     </div>
-    <a href="@Url.Action("ArticleDetail", new { url = Model.Url, Culture })" class="btn-article">
+    <a href="@Url.Action("ArticleDetail", "Home", new { url = Model.Url, Culture })" class="btn-article">
         <span>
             @Resources.MoreInfo
         </span>

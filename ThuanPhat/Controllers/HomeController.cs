@@ -1,17 +1,14 @@
 ﻿using Helpers;
 using PagedList;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Data.Entity;
 using ThuanPhat.Models;
 using ThuanPhat.ViewModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System;
-using System.Drawing;
 using ThuanPhat.Filters;
 
 namespace ThuanPhat.Controllers
@@ -21,9 +18,8 @@ namespace ThuanPhat.Controllers
         private static string Email => WebConfigurationManager.AppSettings["email"];
         private static string Password => WebConfigurationManager.AppSettings["password"];
 
-
-        [HttpGet, LanguageFilters]
         #region Home
+        [HttpGet, LanguageFilters]
         [Route("{culture:regex(^(?!.*(vcms|article|banner|contact|uploader|service)).*$)}", Order = 1)]
         [Route(Order = 2)]
         public ActionResult Index()
@@ -37,11 +33,12 @@ namespace ThuanPhat.Controllers
                 ServiceDtos = ServiceDtos().Where(a => a.Active && a.Home).OrderByDescending(a => a.CreateDate),
                 ServiceCategoryDtos = ServiceCategoryDtos().Where(a => a.CategoryActive && a.ShowHome && a.ParentId == null).OrderBy(a => a.CategorySort).Take(3),
                 IntroduceDtos = ArticleDtos().Where(a => a.Active && a.Home && a.TypePost == TypePost.Introduce).OrderByDescending(a => a.CreateDate).Take(4),
-                RecruitDto = ArticleCategoryDtos().Where(a => a.ShowHome && a.TypePost == TypePost.Recruit).FirstOrDefault(),
+                RecruitDto = ArticleCategoryDtos().FirstOrDefault(a => a.ShowHome && a.TypePost == TypePost.Recruit),
                 ConfigSiteDto = ConfigSiteDto(),
             };
             return View(model);
         }
+
         [ChildActionOnly]
         public PartialViewResult Header()
         {
@@ -125,9 +122,11 @@ namespace ThuanPhat.Controllers
             };
             return View(model);
         }
-
+        [HttpGet, LanguageFilters]
+        [Route("{culture:regex(^(?!.*vi).*$)}/recruit", Order = 1)]
+        [Route("{culture=vi}/dang-ky-tuyen-dung", Order = 2)]
         [HttpPost, ValidateInput(false)]
-        public ActionResult RecruitForm(RecruitViewModel model, FormCollection fc)
+        public ActionResult Recruit(RecruitViewModel model, FormCollection fc)
         {
             if (ModelState.IsValid)
             {

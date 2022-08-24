@@ -2,6 +2,7 @@
 @{
     var config = Model.ConfigSiteDto;
     ViewBag.Title = Resources.Contact;
+    ViewBag.Description = Resources.Contact;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Contact", new { Culture });
 }
 

@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = Model.ServiceDto.TitleMeta ?? Model.ServiceDto.ServiceName;
     ViewBag.Description = Model.ServiceDto.DescriptionMeta ?? Html.CutString(Html.RemoveHtml(Model.ServiceDto.Description), 150);
-    ViewBag.Canonical = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ServiceDetail", new { url = Model.ServiceDto.Url, Culture });
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ServiceDetail", new { url = Model.ServiceDto.Url, Culture });
 
     if (Model.ServiceDto.Image != null)
     {
-        ViewBag.ImageShare = Request.Url.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/services/", Model.ServiceDto.Image);
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/services/", Model.ServiceDto.Image);
     }
 }
 

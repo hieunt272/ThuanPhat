@@ -2,11 +2,11 @@
 @{
     ViewBag.Title = Model.ArticleDto.TitleMeta ?? Model.ArticleDto.Subject;
     ViewBag.Description = Model.ArticleDto.DescriptionMeta ?? Model.ArticleDto.Description;
-    ViewBag.Canonical = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleDetail", new { Model.ArticleDto.Url, Culture });
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleDetail", new { Model.ArticleDto.Url, Culture });
 
     if (Model.ArticleDto.Image != null)
     {
-        ViewBag.ImageShare = Request.Url.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/articles/", Model.ArticleDto.Image);
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/articles/", Model.ArticleDto.Image);
     }
 }
 

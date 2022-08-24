@@ -48,11 +48,11 @@
                         <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span>
                     </td>
                 </tr>
-                @if (categoryVi.Image != null)
+                @if (categoryVi?.Image != null)
                 {
                     <tr>
                         <td class="form_name"></td>
-                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/banners/",  categoryVi.Image)" /></td>
+                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/banners/",  categoryVi?.Image)" /></td>
                     </tr>
                 }
                 <tr>

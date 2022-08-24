@@ -2,6 +2,7 @@
 @using PagedList.Mvc
 @{
     ViewBag.Title = Resources.AllService;
+    ViewBag.Description = Resources.AllService;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("AllService", Culture);
 }
 
@@ -20,28 +21,7 @@
                 foreach (var item in Model.ServiceDtos)
                 {
                     <div class="col-lg-4 col-md-6">
-                        <div class="service-item">
-                            <a href="@Url.Action("ServiceDetail", new { url = item.Url })">
-                                @if (item.Image != null)
-                                {
-                                    <img data-src="@Path.Combine("/images/services/", item.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@item.ServiceName" />
-                                }
-                                else
-                                {
-                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.ServiceName" />
-                                }
-                            </a>
-                            <div class="body">
-                                <div class="service-name truncate">
-                                    <a href="@Url.Action("ServiceDetail", new { url = item.Url, Culture })" title="@item.ServiceName">
-                                        @item.ServiceName
-                                    </a>
-                                </div>
-                                <div class="desc truncate">
-                                    @item.Description
-                                </div>
-                            </div>
-                        </div>
+                        @Html.Partial("_ServiceItem", item)
                     </div>
                 }
             }

@@ -2,6 +2,7 @@
 @using PagedList.Mvc
 @{
     ViewBag.Title = Resources.AllArticle;
+    ViewBag.Description = Resources.AllArticle;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("AllArticle", Culture);
 }
 
