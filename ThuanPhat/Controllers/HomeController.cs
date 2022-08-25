@@ -228,7 +228,8 @@ namespace ThuanPhat.Controllers
             {
                 CategoryDto = category,
                 ArticleDtos = articles.ToPagedList(pageNumber, 12),
-                CategoryDtos = ArticleCategoryDtos(),
+                CategoryDtos = ArticleCategoryDtos().Where(a => a.CategoryActive && a.TypePost != TypePost.Introduce).OrderBy(a => a.CategorySort),
+                IntroduceCatDto = ArticleCategoryDtos().FirstOrDefault(a => a.CategoryActive && a.TypePost == TypePost.Introduce),
             };
             return View(model);
         }
@@ -243,7 +244,8 @@ namespace ThuanPhat.Controllers
             var model = new AllArticleViewModel()
             {
                 ArticleDtos = article.ToPagedList(pageNumber, 12),
-                CategoryDtos = ArticleCategoryDtos(),
+                CategoryDtos = ArticleCategoryDtos().Where(a => a.CategoryActive && a.TypePost != TypePost.Introduce).OrderBy(a => a.CategorySort),
+                IntroduceCatDto = ArticleCategoryDtos().FirstOrDefault(a => a.CategoryActive && a.TypePost == TypePost.Introduce),
             };
             return View(model);
         }

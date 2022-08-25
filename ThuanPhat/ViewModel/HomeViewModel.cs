@@ -40,6 +40,7 @@ namespace ThuanPhat.ViewModel
     {
         public IPagedList<ArticleDto> ArticleDtos { get; set; }
         public IEnumerable<ArticleCategoryDto> CategoryDtos { get; set; }
+        public ArticleCategoryDto IntroduceCatDto { get; set; }
         public ConfigSiteDto ConfigSiteDto { get; set; }
     }
     public class ArticleCategoryViewModel
@@ -47,6 +48,7 @@ namespace ThuanPhat.ViewModel
         public ArticleCategoryDto CategoryDto { get; set; }
         public IPagedList<ArticleDto> ArticleDtos { get; set; }
         public IEnumerable<ArticleCategoryDto> CategoryDtos { get; set; }
+        public ArticleCategoryDto IntroduceCatDto { get; set; }
     }
     public class ArticleDetailsViewModel 
     {

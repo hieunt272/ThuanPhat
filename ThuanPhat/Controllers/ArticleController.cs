@@ -195,6 +195,8 @@ namespace ThuanPhat.Controllers
             var formationText = fc["FormationText"];
             string aboutImage = null;
 
+            var urlCovert = HtmlHelpers.ConvertToUnSign(null, url);
+
             var file = Request.Files["AboutImage"];
             if (file != null && file.ContentLength > 0)
             {
@@ -229,7 +231,7 @@ namespace ThuanPhat.Controllers
                     ArticleCategoryId = catId,
                     LanguageId = langId,
                     CategoryName = name,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name),
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlCovert ?? conceptCategoryLang.ArticleCategory.Url),
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
                     Description = description,
@@ -243,13 +245,20 @@ namespace ThuanPhat.Controllers
             }
             conceptCategoryLang.CategoryName = name;
             conceptCategoryLang.Description = description;
-            conceptCategoryLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
             conceptCategoryLang.TitleMeta = titleMeta;
             conceptCategoryLang.DescriptionMeta = descriptionMeta;
             conceptCategoryLang.AboutText = aboutText;
             conceptCategoryLang.MottoText = mottoText;
             conceptCategoryLang.FormationText = formationText;
             conceptCategoryLang.AboutImage = aboutImage;
+            if (urlCovert == "")
+            {
+                conceptCategoryLang.Url = conceptCategoryLang.ArticleCategory.Url;
+            }
+            else
+            {
+                conceptCategoryLang.Url = urlCovert;
+            }
 
             _unitOfWork.Save();
             return RedirectToAction("UpdateArticleCategoryLang", new { catId, result = 1 });
@@ -483,6 +492,8 @@ namespace ThuanPhat.Controllers
             var description = fc["Description"];
             var url = fc["Url"];
 
+            var urlConvert = HtmlHelpers.ConvertToUnSign(null, url);
+
             var conceptLang = _unitOfWork.ArticleLangRepository.GetQuery(a => a.ArticleId == artId && a.LanguageId == langId).SingleOrDefault();
 
             if (conceptLang == null)
@@ -496,7 +507,7 @@ namespace ThuanPhat.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name)
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptLang.Article.Url)
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateArticleLang", new { artId, result = 1 });
@@ -507,7 +518,15 @@ namespace ThuanPhat.Controllers
             conceptLang.Body = body;
             conceptLang.TitleMeta = titleMeta;
             conceptLang.DescriptionMeta = descriptionMeta;
-            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptLang.Article.Url);
+            if (urlConvert == "")
+            {
+                conceptLang.Url = conceptLang.Article.Url;
+            }
+            else
+            {
+                conceptLang.Url = urlConvert;
+            }
 
             _unitOfWork.Save();
 

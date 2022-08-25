@@ -211,6 +211,8 @@ namespace ThuanPhat.Controllers
             var titleMeta = fc["TitleMeta"];
             var descriptionMeta = fc["DescriptionMeta"];
 
+            var urlConvert = HtmlHelpers.ConvertToUnSign(null, url);
+
             var conceptCategoryLang = _unitOfWork.ServiceCategoryLangRepository.GetQuery(a => a.ServiceCategoryId == catId && a.LanguageId == langId).SingleOrDefault();
 
             if (conceptCategoryLang == null)
@@ -220,7 +222,7 @@ namespace ThuanPhat.Controllers
                     ServiceCategoryId = catId,
                     LanguageId = langId,
                     CategoryName = name,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name),
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptCategoryLang.ServiceCategory.Url),
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
                     Description = description
@@ -230,9 +232,16 @@ namespace ThuanPhat.Controllers
             }
             conceptCategoryLang.CategoryName = name;
             conceptCategoryLang.Description = description;
-            conceptCategoryLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
             conceptCategoryLang.TitleMeta = titleMeta;
             conceptCategoryLang.DescriptionMeta = descriptionMeta;
+            if (urlConvert == "")
+            {
+                conceptCategoryLang.Url = conceptCategoryLang.ServiceCategory.Url;
+            }
+            else
+            {
+                conceptCategoryLang.Url = urlConvert;
+            }
 
             _unitOfWork.Save();
             return RedirectToAction("UpdateServiceCategoryLang", new { catId, result = 1 });
@@ -462,6 +471,8 @@ namespace ThuanPhat.Controllers
             var description = fc["Description"];
             var url = fc["Url"];
 
+            var urlConvert = HtmlHelpers.ConvertToUnSign(null, url);
+
             var conceptLang = _unitOfWork.ServiceLangRepository.GetQuery(a => a.ServiceId == serviceId && a.LanguageId == langId).SingleOrDefault();
 
             if (conceptLang == null)
@@ -475,7 +486,7 @@ namespace ThuanPhat.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name)
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptLang.Service.Url),
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateServiceLang", new { serviceId, result = 1 });
@@ -486,7 +497,14 @@ namespace ThuanPhat.Controllers
             conceptLang.Body = body;
             conceptLang.TitleMeta = titleMeta;
             conceptLang.DescriptionMeta = descriptionMeta;
-            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            if (urlConvert == "")
+            {
+                conceptLang.Url = conceptLang.Service.Url;
+            }
+            else
+            {
+                conceptLang.Url = urlConvert;
+            }
 
             _unitOfWork.Save();
 
