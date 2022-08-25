@@ -193,7 +193,7 @@ namespace ThuanPhat.Controllers
             var slogan = fc["Slogan"];
             var content = fc["Content"];
             var url = fc["Url"];
-            var image = "";
+            string image = null;
 
             var file = Request.Files["Image"];
             if (file != null && file.ContentLength > 0)
@@ -241,14 +241,8 @@ namespace ThuanPhat.Controllers
             albumLang.Slogan = slogan;
             albumLang.Url = url;
             albumLang.Content = content;
-            if (image != "")
-            {
-                albumLang.Image = image;
-            }
-            else
-            {
-                albumLang.Image = null;
-            }
+            albumLang.Image = image;
+
             _unitOfWork.Save();
             return RedirectToAction("UpdateBannerLang", new { bannerId, result = 1 });
         }

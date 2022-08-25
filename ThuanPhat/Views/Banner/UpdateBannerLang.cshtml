@@ -58,7 +58,9 @@
                 <tr>
                     <td class="form_name">Url</td>
                     <td class="form_text">
-                        <input type="text" name="Url" value="@(categoryVi?.Url)" class="form_control w300" />
+                        <input type="text" name="Url" class="form_control w300" 
+                               @if (categoryVi?.Url != null) { @Html.Raw("value='" + categoryVi.Url + "'")  } 
+                               else { @Html.Raw("value='" + Model.Url + "'") }  />
                     </td>
                 </tr>
 

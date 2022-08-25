@@ -53,7 +53,11 @@
                 </tr>
                 <tr>
                     <td class="form_name">Đường dẫn</td>
-                    <td class="form_text"><input type="text" name="Url" maxlength="100" class="form_control w300" value="@(categoryVi?.Url)" /></td>
+                    <td class="form_text">
+                        <input type="text" name="Url" maxlength="100" class="form_control w300"
+                               @if (categoryVi?.Url != null) { @Html.Raw("value='" + categoryVi.Url + "'")  } 
+                               else { @Html.Raw("value='" + Model.Url + "'") } />
+                    </td>
                 </tr>
                 <tr>
                     <td class="form_name">Thẻ SEO Title</td>

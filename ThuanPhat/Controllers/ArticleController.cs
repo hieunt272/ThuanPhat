@@ -193,7 +193,7 @@ namespace ThuanPhat.Controllers
             var aboutText = fc["AboutText"];
             var mottoText = fc["MottoText"];
             var formationText = fc["FormationText"];
-            var aboutImage = "";
+            string aboutImage = null;
 
             var file = Request.Files["AboutImage"];
             if (file != null && file.ContentLength > 0)
@@ -249,14 +249,7 @@ namespace ThuanPhat.Controllers
             conceptCategoryLang.AboutText = aboutText;
             conceptCategoryLang.MottoText = mottoText;
             conceptCategoryLang.FormationText = formationText;
-            if (aboutImage != "")
-            {
-                conceptCategoryLang.AboutImage = aboutImage;
-            }
-            else
-            {
-                conceptCategoryLang.AboutImage = null;
-            }
+            conceptCategoryLang.AboutImage = aboutImage;
 
             _unitOfWork.Save();
             return RedirectToAction("UpdateArticleCategoryLang", new { catId, result = 1 });

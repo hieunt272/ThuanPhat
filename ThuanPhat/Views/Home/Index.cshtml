@@ -20,7 +20,10 @@
         <div class="banner-list">
             @foreach (var banner in Model.BannerDtos.Where(b => b.GroupId == 1))
             {
-                <img data-src="@Path.Combine("/images/banners/", banner.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@banner.BannerName" />
+                if (banner.Image != null)
+                {
+                    <img data-src="@Path.Combine("/images/banners/", banner.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@banner.BannerName" />
+                }
             }
         </div>
         @if (Model.BannerDtos.Count(a => a.GroupId == 1) > 1)

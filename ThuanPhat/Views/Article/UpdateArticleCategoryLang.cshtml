@@ -111,7 +111,9 @@
                 <tr>
                     <td class="form_name">Đường dẫn</td>
                     <td class="form_text">
-                        <input type="text" name="Url" maxlength="500" class="form_control w300" value="@(categoryVi?.Url)" />
+                        <input type="text" name="Url" maxlength="500" class="form_control w300" 
+                               @if (categoryVi?.Url != null) { @Html.Raw("value='" + categoryVi.Url + "'") } 
+                               else { @Html.Raw("value='" + Model.Url + "'") } />
                     </td>
                 </tr>
                 <tr>
