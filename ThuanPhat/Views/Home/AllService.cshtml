@@ -16,12 +16,45 @@
 <section class="service-cat">
     <div class="container">
         <div class="row">
-            @if (Model.ServiceDtos.Any())
+            @if (Model.ServiceCategoryDtos.Any())
             {
-                foreach (var item in Model.ServiceDtos)
+                foreach (var category in Model.ServiceCategoryDtos)
                 {
-                    <div class="col-lg-4 col-md-6">
-                        @Html.Partial("_ServiceItem", item)
+                    <div class="col-lg-4 col-12">
+                        <div class="service-item">
+                            <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })">
+                                @if (category.Image != null)
+                                {
+                                    <img data-src="@Path.Combine("/images/serviceCategory/", category.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@category.CategoryName" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@category.CategoryName" />
+                                }
+                            </a>
+                            <div class="body">
+                                <div class="service-name truncate">
+                                    <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })" title="@category.CategoryName">
+                                        @category.CategoryName
+                                    </a>
+                                </div>
+                                @if (Model.ServiceDtos.Any(a => a.ServiceCategoryId == category.Id))
+                                {
+                                    <ul class="service-list">
+                                        @foreach (var item in Model.ServiceDtos.Where(a => a.ServiceCategoryId == category.Id))
+                                        {
+                                            <li>
+                                                <div class="service-subject truncate">
+                                                    <a href="@Url.Action("ServiceDetail", new { url = item.Url })" class="@item.ServiceName">
+                                                        @item.ServiceName
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                        </div>
                     </div>
                 }
             }
@@ -31,10 +64,10 @@
                     <p class="alert alert-success small">@Resources.ContentNotUpdate!!!!</p>
                 </div>
             }
-            @if (Model.ServiceDtos.PageCount > 1)
+            @if (Model.ServiceCategoryDtos.PageCount > 1)
             {
                 <div class="col-12 text-center mt-3">
-                    @Html.PagedListPager(Model.ServiceDtos, page => Url.Action("AllService", new { page }))
+                    @Html.PagedListPager(Model.ServiceCategoryDtos, page => Url.Action("AllService", new { page }))
                 </div>
             }
         </div>

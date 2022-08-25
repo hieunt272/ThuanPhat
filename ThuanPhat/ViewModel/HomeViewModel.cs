@@ -71,7 +71,8 @@ namespace ThuanPhat.ViewModel
     }
     public class AllServiceViewModel
     {
-        public IPagedList<ServiceDto> ServiceDtos { get; set; }
+        public IPagedList<ServiceCategoryDto> ServiceCategoryDtos { get; set; }
+        public IEnumerable<ServiceDto> ServiceDtos { get; set; }
     }
     public class ServiceCategoryViewModel
     {

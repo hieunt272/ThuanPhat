@@ -1,8 +1,7 @@
 ﻿@model ThuanPhat.ViewModel.ServiceDetailViewModel
-@using Helpers
 @{
     ViewBag.Title = Model.ServiceDto.TitleMeta ?? Model.ServiceDto.ServiceName;
-    ViewBag.Description = Model.ServiceDto.DescriptionMeta ?? Html.CutString(Html.RemoveHtml(Model.ServiceDto.Description), 150);
+    ViewBag.Description = Model.ServiceDto.DescriptionMeta ?? Model.ServiceDto.Description;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ServiceDetail", new { url = Model.ServiceDto.Url, Culture });
 
     if (Model.ServiceDto.Image != null)

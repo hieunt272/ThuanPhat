@@ -202,8 +202,9 @@ input::-webkit-inner-spin-button {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 .header .logo img {
-  width: auto;
+  max-width: 100%;
   height: 90px;
+  object-fit: contain;
 }
 
 .header-top {
@@ -583,6 +584,7 @@ input::-webkit-inner-spin-button {
 }
 .service-item .service-list li a {
   color: #fff;
+  -webkit-line-clamp: 2;
 }
 .service-item .service-list li a:hover {
   color: #0880C1;

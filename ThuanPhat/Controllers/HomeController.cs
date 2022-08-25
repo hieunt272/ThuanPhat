@@ -291,10 +291,11 @@ namespace ThuanPhat.Controllers
         public ActionResult AllService(int? page)
         {
             var pageNumber = page ?? 1;
-            var service = ServiceDtos().Where(a => a.Active).OrderByDescending(a => a.CreateDate);
+            var serviceCatDtos = ServiceCategoryDtos().Where(a => a.CategoryActive).OrderBy(a => a.CategorySort);
             var model = new AllServiceViewModel()
             {
-                ServiceDtos = service.ToPagedList(pageNumber, 12),
+                ServiceCategoryDtos = serviceCatDtos.ToPagedList(pageNumber, 12),
+                ServiceDtos = ServiceDtos(),
             };
             return View(model);
         }

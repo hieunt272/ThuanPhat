@@ -56,13 +56,15 @@
                         <span class="red-warring">Chấp nhận ảnh jpg, png, gif, jpeg < 4MB</span>
                     </td>
                 </tr>
-                @if (categoryVi.AboutImage != null)
-                {
-                    <tr>
-                        <td class="form_name"></td>
-                        <td class="form_text"><img class="img-border" src="@Path.Combine("/images/articleCategory/",  categoryVi.AboutImage)" /></td>
-                    </tr>
-                }
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text">
+                        @if (categoryVi?.AboutImage != null)
+                        {
+                            <img class="img-border" src="@Path.Combine("/images/articleCategory/",  categoryVi?.AboutImage)" />
+                        }
+                    </td>
+                </tr>
                 <tr>
                     <td class="form_name">
                         Nội dung giới thiệu<br />

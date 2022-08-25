@@ -33,9 +33,9 @@
                     <td class="form_text"><strong>@Model.Description</strong></td>
                 </tr>
                 <tr>
-                    <td class="form_name">Mô tả dịch vụ</td>
+                    <td class="form_name">Giới thiệu ngắn</td>
                     <td class="form_text">
-                        <input type="text" name="Description" required="" maxlength="100" class="form_control w300" value="@(categoryVi?.Description)" />
+                        <textarea class="form_control w300" rows="4" name="DescriptionMeta">@(categoryVi?.Description)</textarea>
                     </td>
                 </tr>
                 <tr>
