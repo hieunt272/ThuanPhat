@@ -1,18 +1,14 @@
 ﻿using Helpers;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Drawing;
-using System.Data.Entity;
-using PagedList;
 using ThuanPhat.DAL;
 using ThuanPhat.Models;
 using ThuanPhat.ViewModel;
-using System.Globalization;
 
 namespace ThuanPhat.Controllers
 {
@@ -266,7 +262,28 @@ namespace ThuanPhat.Controllers
                 config.TaxCode = model.TaxCode;
 
                 _unitOfWork.Save();
-                HttpContext.Application["ConfigSite"] = config;
+                HttpContext.Application["ConfigSite"] = new ConfigSiteDto
+                {
+                    Title = config.Title,
+                    Description = config.Description,
+                    Image = config.Image,
+                    Email = config.Email,
+                    Facebook = config.Facebook,
+                    GoogleAnalytics = config.GoogleAnalytics,
+                    GoogleMap = config.GoogleMap,
+                    Hotline = config.Hotline,
+                    InfoFooter = config.InfoFooter,
+                    Instagram = config.Instagram,
+                    LiveChat = config.LiveChat,
+                    Place = config.Place,
+                    Twitter = config.Twitter,
+                    InfoContact = config.InfoContact,
+                    AboutText = config.AboutText,
+                    AboutImage = config.AboutImage,
+                    Youtube = config.Youtube,
+                    TaxCode = config.TaxCode,
+                    Favicon = config.Favicon,
+                };
                 return RedirectToAction("ConfigSite", "Vcms", new { result = "success" });
             }
             return View("ConfigSite", model);
@@ -301,8 +318,7 @@ namespace ThuanPhat.Controllers
                     InfoFooter = infoFooter,
                     Place = place,
                     InfoContact = infoContact,
-                    AboutText = aboutText,
-
+                    AboutText = aboutText
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateConfigSiteLang", new { configSiteId, result = 1 });
@@ -336,8 +352,7 @@ namespace ThuanPhat.Controllers
                 TaxCode = configSiteLang.ConfigSite.TaxCode,
                 Favicon = configSiteLang.ConfigSite.Favicon,
                 AboutImage = configSiteLang.ConfigSite.AboutImage,
-                InfoContact = configSiteLang.InfoContact,
-                
+                InfoContact = configSiteLang.InfoContact
             };
             return RedirectToAction("UpdateConfigSiteLang", new { configSiteId, result = 1 });
         }

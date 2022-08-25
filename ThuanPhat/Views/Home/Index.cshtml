@@ -4,7 +4,7 @@
     var config = Model.ConfigSiteDto;
     ViewBag.Title = config.Title;
     ViewBag.Description = config.Description;
-    ViewBag.Canonical = Request.Url.GetLeftPart(UriPartial.Authority) + Url.Action("Index", new { Culture });
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Index", new { Culture });
 
     var fb = Model.BannerDtos.FirstOrDefault(b => b.Image != null && b.GroupId == 1);
     if (fb != null)
