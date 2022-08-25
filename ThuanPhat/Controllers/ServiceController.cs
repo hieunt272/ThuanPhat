@@ -217,16 +217,24 @@ namespace ThuanPhat.Controllers
 
             if (conceptCategoryLang == null)
             {
-                _unitOfWork.ServiceCategoryLangRepository.Insert(new ServiceCategoryLang
+                var catLang = new ServiceCategoryLang
                 {
                     ServiceCategoryId = catId,
                     LanguageId = langId,
                     CategoryName = name,
-                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptCategoryLang.ServiceCategory.Url),
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert),
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
                     Description = description
-                });
+                };
+                _unitOfWork.ServiceCategoryLangRepository.Insert(catLang);
+
+                if (catLang.Url == null)
+                {
+                    var category = _unitOfWork.ServiceCategoryRepository.GetById(catId);
+                    category.Url = category?.Url;
+                }
+
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateServiceCategoryLang", new { catId, result = 1 });
             }
@@ -477,7 +485,7 @@ namespace ThuanPhat.Controllers
 
             if (conceptLang == null)
             {
-                _unitOfWork.ServiceLangRepository.Insert(new ServiceLang
+                var serviceLang = new ServiceLang
                 {
                     ServiceId = serviceId,
                     LanguageId = langId,
@@ -486,8 +494,14 @@ namespace ThuanPhat.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptLang.Service.Url),
-                });
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert)
+                };
+                if (serviceLang.Url == null)
+                {
+                    var service = _unitOfWork.ServiceLangRepository.GetById(serviceId);
+                    serviceLang.Url = service.Url;
+                }
+                _unitOfWork.ServiceLangRepository.Insert(serviceLang);
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateServiceLang", new { serviceId, result = 1 });
             }

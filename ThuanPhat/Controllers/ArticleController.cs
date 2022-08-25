@@ -226,12 +226,12 @@ namespace ThuanPhat.Controllers
 
             if (conceptCategoryLang == null)
             {
-                _unitOfWork.ArticleCategoryLangRepository.Insert(new ArticleCategoryLang
+                var catLang = new ArticleCategoryLang
                 {
                     ArticleCategoryId = catId,
                     LanguageId = langId,
                     CategoryName = name,
-                    Url = HtmlHelpers.ConvertToUnSign(null, urlCovert ?? conceptCategoryLang.ArticleCategory.Url),
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlCovert),
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
                     Description = description,
@@ -239,7 +239,14 @@ namespace ThuanPhat.Controllers
                     MottoText = mottoText,
                     FormationText = formationText,
                     AboutImage = aboutImage,
-                });
+                };
+
+                if (catLang.Url == null)
+                {
+                    var category = _unitOfWork.ArticleCategoryRepository.GetById(catId);
+                    catLang.Url = category.Url;
+                }
+                _unitOfWork.ArticleCategoryLangRepository.Insert(catLang);
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateArticleCategoryLang", new { catId, result = 1 });
             }
@@ -498,7 +505,7 @@ namespace ThuanPhat.Controllers
 
             if (conceptLang == null)
             {
-                _unitOfWork.ArticleLangRepository.Insert(new ArticleLang
+                var artLang = new ArticleLang
                 {
                     ArticleId = artId,
                     LanguageId = langId,
@@ -507,8 +514,15 @@ namespace ThuanPhat.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert ?? conceptLang.Article.Url)
-                });
+                    Url = HtmlHelpers.ConvertToUnSign(null, urlConvert)
+                };
+
+                if (artLang.Url == null)
+                {
+                    var article = _unitOfWork.ArticleRepository.GetById(artId);
+                    artLang.Url = article.Url;
+                }
+                _unitOfWork.ArticleLangRepository.Insert(artLang);
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateArticleLang", new { artId, result = 1 });
             }

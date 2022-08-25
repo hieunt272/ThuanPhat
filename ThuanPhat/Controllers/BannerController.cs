@@ -1,12 +1,9 @@
 ﻿using Helpers;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using System.Drawing;
 using ThuanPhat.DAL;
 using ThuanPhat.Models;
 using ThuanPhat.ViewModel;
