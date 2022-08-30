@@ -7,9 +7,9 @@
 
 <section class="banner-cat banner-intro" @if (Model.IntroduceDto.Image != null) { @Html.Raw("style='background-image: url(" + Path.Combine("/images/articleCategory/", Model.IntroduceDto.Image) + ")'") }>
     <div class="container">
-        <div class="cat-name">
+        <h1 class="cat-name">
             @Resources.Introduce
-        </div>
+        </h1>
         <div class="cat-desc">
             @Model.IntroduceDto.Description
         </div>

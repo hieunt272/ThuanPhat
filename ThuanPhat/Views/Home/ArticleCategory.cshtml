@@ -8,9 +8,9 @@
 
 <section class="banner-cat banner-article">
     <div class="container">
-        <div class="cat-name">
+        <h1 class="cat-name">
             @Model.CategoryDto.CategoryName
-        </div>
+        </h1>
         @if (Model.CategoryDto.Description != null)
         {
             <div class="cat-desc">
@@ -33,9 +33,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="mb-0">
+                                        <div>
                                             <a href="@Url.Action("Introduce", new { Culture })">@Model.IntroduceCatDto.CategoryName</a>
-                                        </h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -45,9 +45,9 @@
                             <div class="card">
                                 <div class="card-header" id="heading-@item.Id">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="mb-0">
+                                        <div>
                                             <a href="@Url.Action("ArticleCategory", "Home", new { url = item.Url, Culture })">@item.CategoryName</a>
-                                        </h2>
+                                        </div>
                                         @if (Model.CategoryDtos.Any(a => a.ParentId == item.Id))
                                         {
                                             <button class="btn-card" type="button" data-toggle="collapse" data-target="#collapse-@item.Id" aria-expanded="false" aria-controls="collapse-@item.Id">
@@ -56,7 +56,7 @@
                                         }
                                     </div>
                                 </div>
-                                @if (Model.CategoryDtos.Where(a => a.ParentId == item.Id).Any())
+                                @if (Model.CategoryDtos.Any(a => a.ParentId == item.Id))
                                 {
                                     <div id="collapse-@item.Id" class="collapse">
                                         <div class="card-body">

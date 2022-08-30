@@ -1,5 +1,4 @@
 ﻿@model ThuanPhat.ViewModel.HomeViewModel
-@using ThuanPhat.Models
 @{
     var config = Model.ConfigSiteDto;
     ViewBag.Title = config.Title;
@@ -13,7 +12,7 @@
     }
     var number = 1;
 }
-
+<h1 class="d-none">@config.Title</h1>
 @if (Model.BannerDtos.Any(b => b.GroupId == 1))
 {
     <section class="banner position-relative">
