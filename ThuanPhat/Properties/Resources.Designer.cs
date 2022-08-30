@@ -376,15 +376,6 @@ namespace ThuanPhat.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ngôn ngữ.
-        /// </summary>
-        public static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nam.
         /// </summary>
         public static string Male {

@@ -221,34 +221,23 @@ input::-webkit-inner-spin-button {
   margin-right: 2px;
 }
 
-.dropdown-text {
-  margin-left: 40px;
+.languages {
+  display: flex;
   font-size: 0.75rem;
+  margin-left: 30px;
 }
-.dropdown-text .btn {
-  padding: 0 6px;
-  color: #fff;
-  background: #666666;
-  font-size: 0.625rem;
-  border-radius: 0;
-  height: 16px;
+.languages li {
   margin-left: 10px;
 }
-.dropdown-text .btn:focus {
-  box-shadow: none;
+.languages a {
+  color: #666666;
 }
-.dropdown-text .btn:after {
-  display: none;
+.languages a.active {
+  font-family: "InterBold";
 }
-
-.dropdown-menu {
-  font-size: 0.8rem;
-  left: auto;
-  right: 0;
-}
-.dropdown-menu a {
-  color: #000;
-  text-transform: none;
+.languages a span {
+  transform: translateY(1px);
+  display: inline-block;
 }
 
 .img-flag {
@@ -1736,6 +1725,20 @@ input::-webkit-inner-spin-button {
   }
 }
 @media (max-width: 820px) {
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #666666;
+    border-radius: 10px;
+  }
+
   .sub-title {
     width: 80%;
     margin: 0 auto;
@@ -1861,6 +1864,13 @@ input::-webkit-inner-spin-button {
     font-size: 0.875rem;
     background: #fff;
     padding: 5px 30px;
+  }
+
+  .languages {
+    margin-left: 0;
+  }
+  .languages a.active {
+    color: #0880C1;
   }
 
   .introduce {

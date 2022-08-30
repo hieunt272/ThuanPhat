@@ -188,4 +188,9 @@ $(function () {
     });
 
     setTimeout(alertBox, 3000);
+
+    if (window.location.pathname == "/ja") {
+        $(".languages .ja").addClass("active");
+        $(".languages .vn").removeClass("active");
+    }
 });

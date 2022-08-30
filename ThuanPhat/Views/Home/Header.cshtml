@@ -30,23 +30,21 @@
                             @config.Email
                         </a>
                     </div>
-                    <div class="dropdown dropdown-text d-none d-lg-inline-flex">
-                        <span>@Resources.Language</span>
-                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                            @if (Culture == "vi")
-                            {
-                                @:Tiếng Việt
-                            }
-                            else
-                            {
-                                @Resources.Japanese
-                            }
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdown action chat">
-                            <a class="dropdown-item" href="@Url.Action("Index", new{culture = "vi"})"><img class="img-flag mr-1" src="~/Content/images/img-main/vn.jpg" alt="vn" /> @Resources.Vietnamese</a>
-                            <a class="dropdown-item" href="@Url.Action("Index", new{culture = "ja"})"><img class="img-flag mr-1" src="~/Content/images/img-main/japan.png" alt="en" /> @Resources.Japanese</a>
-                        </div>
-                    </div>
+                    <ul class="ul-reset languages">
+                        <li>Languages</li>
+                        <li>
+                            <a href="@Url.Action("Index", new { culture = "ja" })" class="ja">
+                                <img class="img-flag" src="~/Content/images/img-main/japan.png" alt="jp" />
+                                <span>JP</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", new { culture = "vi" })" class="vn active">
+                                <img class="img-flag" src="~/Content/images/img-main/vn.jpg" alt="vn" />
+                                <span>VN</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="menu">
                     <ul class="ul-reset nav">
@@ -256,9 +254,9 @@
                     </a>
                 </li>
                 <li class="hidden-lang">
-                    <div class="d-flex justify-content-center">
-                        <a href="@Url.Action("Index" , new{Culture = "vi"})">@Resources.Vietnamese</a>
-                        <a href="@Url.Action("Index" , new{Culture = "ja"})">@Resources.Japanese</a>
+                    <div class="d-flex justify-content-center languages">
+                        <a href="@Url.Action("Index" , new{Culture = "ja"})" class="ja">JP</a>
+                        <a href="@Url.Action("Index" , new{Culture = "vi"})" class="vn active">VN</a>
                     </div>
                 </li>
             </ul>

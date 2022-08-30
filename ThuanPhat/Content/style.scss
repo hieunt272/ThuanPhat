@@ -280,37 +280,22 @@ input::-webkit-inner-spin-button {
     }
 }
 
-.dropdown-text {
-    margin-left: 40px;
+.languages {
+    display: flex;
     font-size: .75rem;
-
-    .btn {
-        padding: 0 6px;
-        color: $white;
-        background: $gray;
-        font-size: .625rem;
-        border-radius: 0;
-        height: 16px;
+    margin-left: 30px;
+    li {
         margin-left: 10px;
-
-        &:focus {
-            box-shadow: none;
-        }
-
-        &:after {
-            display: none;
-        }
     }
-}
-
-.dropdown-menu {
-    font-size: .8rem;
-    left: auto;
-    right: 0;
-
     a {
-        color: #000;
-        text-transform: none;
+        color: $gray;
+        &.active {
+            @include InterBold;
+        }
+        span {
+            transform: translateY(1px);
+            display: inline-block;
+        }
     }
 }
 
@@ -2006,6 +1991,20 @@ input::-webkit-inner-spin-button {
 }
 
 @include maxWidth(820px) {
+    ::-webkit-scrollbar {
+        width: 2px;
+        height: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: $gray;
+        border-radius: 10px;
+    }
+
     .sub-title {
         width: 80%;
         margin: 0 auto;
@@ -2154,6 +2153,13 @@ input::-webkit-inner-spin-button {
             font-size: .875rem;
             background: $white;
             padding: 5px 30px;
+        }
+    }
+
+    .languages {
+        margin-left: 0;
+        a.active {
+            color: $blue;
         }
     }
 

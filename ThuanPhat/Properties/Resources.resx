@@ -222,9 +222,6 @@
   <data name="KeywordSearch" xml:space="preserve">
     <value>Tìm kiếm từ khóa</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>Ngôn ngữ</value>
-  </data>
   <data name="Male" xml:space="preserve">
     <value>Nam</value>
   </data>
