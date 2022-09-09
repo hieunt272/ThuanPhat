@@ -600,16 +600,47 @@ input::-webkit-inner-spin-button {
         margin-bottom: 50px
     }
 
-    .row {
-        margin: 0 -20px;
+    .btn-main {
+        margin-top: 40px;
+    }
+}
 
-        [class*="col-lg"] {
-            padding: 0 20px;
+.service-cat-list {
+    > .service-item:not(:first-child) {
+        display: none;
+    }
+
+    .slick-list {
+        margin: 0 -20px;
+    }
+
+    .slick-slide {
+        padding: 0 20px;
+    }
+
+    .slick-arrow {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: .875rem;
+        color: #000;
+        background: rgba(217, 217, 217, 0.2);
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all .5s;
+
+        &:hover {
+            color: $white;
+            background: $blue;
         }
     }
 
-    .btn-main {
-        margin-top: 40px;
+    .chevron-prev {
+        left: -6%;
+    }
+
+    .chevron-next {
+        right: -6%;
     }
 }
 
@@ -680,9 +711,11 @@ input::-webkit-inner-spin-button {
                 transform: translateY(-50%);
                 background: $white;
             }
+
             a {
                 color: $white;
                 -webkit-line-clamp: 2;
+
                 &:hover {
                     color: $blue;
                 }
@@ -2158,6 +2191,7 @@ input::-webkit-inner-spin-button {
 
     .languages {
         margin-left: 0;
+
         a.active {
             color: $blue;
         }
@@ -2186,13 +2220,8 @@ input::-webkit-inner-spin-button {
     }
 
     .service {
-        .row {
-            margin: 0;
+        .service-cat-list {
             padding: 0 40px;
-
-            [class*="col-lg"] {
-                padding: 0;
-            }
         }
 
         .slick-list {
@@ -2206,12 +2235,6 @@ input::-webkit-inner-spin-button {
         .slick-arrow {
             width: 40px;
             height: 40px;
-            font-size: 0.875rem;
-            border-radius: 50%;
-            color: #000;
-            background: rgba(217, 217, 217, 0.2);
-            top: 50%;
-            transform: translateY(-50%);
         }
 
         .chevron-prev {

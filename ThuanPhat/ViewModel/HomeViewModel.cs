@@ -84,6 +84,7 @@ namespace ThuanPhat.ViewModel
     public class ServiceDetailViewModel
     {
         public ServiceDto ServiceDto { get; set; }
+        public ServiceCategoryLang ServiceCategoryLang { get; set; }
         public IEnumerable<ServiceDto> ServiceDtos { get; set; }
     }
 

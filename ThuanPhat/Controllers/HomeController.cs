@@ -31,7 +31,7 @@ namespace ThuanPhat.Controllers
                 TrainingDtos = ArticleDtos().Where(a => a.Active && a.Home).OrderByDescending(a => a.CreateDate).Take(5),
                 TrainingCatDtos = ArticleCategoryDtos().Where(a => a.CategoryActive && a.ShowHome && a.TypePost == TypePost.Training).OrderBy(a => a.CategorySort),
                 ServiceDtos = ServiceDtos().Where(a => a.Active && a.Home).OrderByDescending(a => a.CreateDate),
-                ServiceCategoryDtos = ServiceCategoryDtos().Where(a => a.CategoryActive && a.ShowHome && a.ParentId == null).OrderBy(a => a.CategorySort).Take(3),
+                ServiceCategoryDtos = ServiceCategoryDtos().Where(a => a.CategoryActive && a.ShowHome && a.ParentId == null).OrderBy(a => a.CategorySort),
                 IntroduceDtos = ArticleDtos().Where(a => a.Active && a.Home && a.TypePost == TypePost.Introduce).OrderByDescending(a => a.CreateDate).Take(4),
                 RecruitDto = ArticleCategoryDtos().FirstOrDefault(a => a.ShowHome && a.TypePost == TypePost.Recruit),
                 ConfigSiteDto = ConfigSiteDto(),
@@ -347,6 +347,7 @@ namespace ThuanPhat.Controllers
             {
                 ServiceDto = service,
                 ServiceDtos = services,
+                ServiceCategoryLang = _unitOfWork.ServiceCategoryLangRepository.Get(a => a.ServiceCategoryId == service.ServiceCategoryId).FirstOrDefault(),
             };
             return View(model);
         }

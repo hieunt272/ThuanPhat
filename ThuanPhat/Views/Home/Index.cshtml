@@ -107,43 +107,41 @@
             <div class="sub-title" data-aos="fade-up" data-aos-duration="700">
                 @Resources.SubTitleService
             </div>
-            <div class="row">
+            <div class="service-cat-list">
                 @foreach (var category in Model.ServiceCategoryDtos)
                 {
-                    <div class="col-lg-4 col-12" data-aos="flip-left" data-aos-duration="700" data-aos-delay="@delay">
-                        <div class="service-item">
-                            <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })">
-                                @if (category.Image != null)
-                                {
-                                    <img data-src="@Path.Combine("/images/serviceCategory/", category.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@category.CategoryName" />
-                                }
-                                else
-                                {
-                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@category.CategoryName" />
-                                }
-                            </a>
-                            <div class="body">
-                                <div class="service-name truncate">
-                                    <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })" title="@category.CategoryName">
-                                        @category.CategoryName
-                                    </a>
-                                </div>
-                                @if (Model.ServiceDtos.Any(a => a.ServiceCategoryId == category.Id))
-                                {
-                                    <ul class="service-list">
-                                        @foreach (var item in Model.ServiceDtos.Where(a => a.ServiceCategoryId == category.Id))
-                                        {
-                                            <li>
-                                                <div class="service-subject truncate">
-                                                    <a href="@Url.Action("ServiceDetail", new { url = item.Url })" class="@item.ServiceName">
-                                                        @item.ServiceName
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-                                }
+                    <div class="service-item" data-aos="flip-left" data-aos-duration="700" data-aos-delay="@delay">
+                        <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })">
+                            @if (category.Image != null)
+                            {
+                                <img data-src="@Path.Combine("/images/serviceCategory/", category.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload" alt="@category.CategoryName" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/img-main/on-image.jpg" alt="@category.CategoryName" />
+                            }
+                        </a>
+                        <div class="body">
+                            <div class="service-name truncate">
+                                <a href="@Url.Action("ServiceCategory", new { url = category.Url, Culture })" title="@category.CategoryName">
+                                    @category.CategoryName
+                                </a>
                             </div>
+                            @if (Model.ServiceDtos.Any(a => a.ServiceCategoryId == category.Id))
+                            {
+                                <ul class="service-list">
+                                    @foreach (var item in Model.ServiceDtos.Where(a => a.ServiceCategoryId == category.Id))
+                                    {
+                                        <li>
+                                            <div class="service-subject truncate">
+                                                <a href="@Url.Action("ServiceDetail", new { url = item.Url })" class="@item.ServiceName">
+                                                    @item.ServiceName
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            }
                         </div>
                     </div>
                     delay += 100;

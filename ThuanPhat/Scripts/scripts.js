@@ -34,22 +34,34 @@ function homeJs() {
         $(".banner-list").slick("slickPlay");
     });
 
-    var mw1360 = window.matchMedia("(max-width: 1360px)");
-    var mw768 = window.matchMedia("(min-width: 768px)");
-    if (mw768.matches && mw1360.matches) {
-        $(".service .row").slick({
-            dots: false,
-            infinite: true,
-            speed: 1000,
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            autoplay: true,
-            speed: 1500,
-            autoplaySpeed: 3000,
-            prevArrow: '<button class="chevron-prev"><i class="fas fa-chevron-left"></i></button>',
-            nextArrow: '<button class="chevron-next"><i class="fas fa-chevron-right"></i></button>',
-        });
-    }
+    $(".service-cat-list").slick({
+        dots: false,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 1500,
+        autoplaySpeed: 3000,
+        prevArrow: '<button class="chevron-prev"><i class="fas fa-chevron-left"></i></button>',
+        nextArrow: '<button class="chevron-next"><i class="fas fa-chevron-right"></i></button>',
+        responsive: [
+            {
+                breakpoint: 830,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
 
     $(".training-list").slick({
         dots: false,
