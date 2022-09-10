@@ -112,6 +112,15 @@
         // Perform additional checks for image files.
         SecureImageUploads = true;
 
+        // Enables protection in the connector.
+        // The default CSRF protection mechanism is based on double submit cookies, where
+        // connector checks if the request contains a valid token that matches the token
+        // sent in the cookie
+        //
+        //https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet#Double_Submit_Cookies
+
+        EnableCsrfProtection = true;
+
         // The session variable name that CKFinder must use to retrieve the
         // "role" of the current user. The "role" is optional and can be used
         // in the "AccessControl" settings (bellow in this file).

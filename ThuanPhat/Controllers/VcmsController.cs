@@ -38,7 +38,7 @@ namespace ThuanPhat.Controllers
 
                     var encTicket = FormsAuthentication.Encrypt(ticket);
                     // Create the cookie.
-                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket) { SameSite = SameSiteMode.Lax, Secure = true });
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {

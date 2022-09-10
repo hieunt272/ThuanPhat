@@ -4,7 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example: 
+	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 
@@ -18,6 +18,5 @@ CKEDITOR.editorConfig = function( config ) {
     config.filebrowserImageUploadUrl = "/Scripts/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
     config.filebrowserFlashUploadUrl = "/Scripts/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash";
 
-    config.extraPlugins = "btgrid,accordionList,collapsibleItem,video"; 
+    config.extraPlugins = "btgrid,videoembed";
 };
-   

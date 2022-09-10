@@ -49,8 +49,7 @@ namespace ThuanPhat
                       "~/Content/PagedList.css",
                       "~/Content/jquery.fancybox.css",
                       "~/Content/tagmanager.css",
-                      "~/Content/adminSite.css"
-                      ));
+                      "~/Content/adminSite.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                       "~/Content/themes/base/*.css"));
