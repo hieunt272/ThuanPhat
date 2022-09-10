@@ -15,8 +15,8 @@
         <ol class="breadcrumb px-0 m-0">
             <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@Resources.Home</a></li>
             <li class="breadcrumb-item">
-                <a href="@Url.Action("ServiceCategory", "Home", new { url = Model.ServiceCategoryLang.Url })">
-                    @Model.ServiceCategoryLang.CategoryName
+                <a href="@Url.Action("ServiceCategory", "Home", new { url = Model.ServiceCategoryDto.Url })">
+                    @Model.ServiceCategoryDto.CategoryName
                 </a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">@Model.ServiceDto.ServiceName</li>

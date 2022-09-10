@@ -347,7 +347,7 @@ namespace ThuanPhat.Controllers
             {
                 ServiceDto = service,
                 ServiceDtos = services,
-                ServiceCategoryLang = _unitOfWork.ServiceCategoryLangRepository.Get(a => a.ServiceCategoryId == service.ServiceCategoryId).FirstOrDefault(),
+                ServiceCategoryDto = ServiceCategoryDtos().Where(a => a.Id == service.ServiceCategoryId).FirstOrDefault(),
             };
             return View(model);
         }
